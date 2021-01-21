@@ -13,7 +13,7 @@ class ViewController: UIViewController  {
     @IBOutlet weak var calendar: FSCalendar!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var selectedDate: UILabel!
-    var arr: Array<String>? = nil
+
     override func viewDidLoad() {
         super.viewDidLoad()
         jsonFileRead()
