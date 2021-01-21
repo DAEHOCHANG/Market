@@ -39,6 +39,7 @@ class AddStarList: UIViewController {
         } else {
             plusModify.setTitle("추가", for: .normal)
         }
+        
     }
     @IBAction func backButton(_ sender: UIButton) {
         self.presentingViewController?.dismiss(animated: true)
