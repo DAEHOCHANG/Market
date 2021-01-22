@@ -71,13 +71,12 @@ class AddProduct: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource
         
         let toolbar = UIToolbar()
         toolbar.tintColor = .systemBlue
-        toolbar.frame = CGRect(x: 0, y: 0, width: 0, height: 35)
+        //UIScreen 은 뭐하는놈이길래,.... 
+        toolbar.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 35)
         let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         
-        toolbar.setItems([flexSpace,exitButton], animated: true)
+        toolbar.setItems([exitButton,flexSpace], animated: false)
         number.inputAccessoryView = toolbar
-        number.isContextMenuInteractionEnabled = false
-        
     }
     
     @objc func pickerExit() {
