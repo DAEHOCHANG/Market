@@ -8,61 +8,65 @@
 import Foundation
 import UIKit
 
-var mData: Dictionary<String,Array<String>> = [:]
-var starData: Array<String> = []
-
-public func jsonFileRead() {
+public func readMarketData() {
     let fileManager = FileManager.default
     let homeDir = fileManager.urls(for: .documentDirectory, in: .userDomainMask)[0]
     
     do {
         let marketFile = homeDir.appendingPathComponent("MarketData")
-        let starFile = homeDir.appendingPathComponent("StarData")
         let marketDatas = try String(contentsOf: marketFile, encoding: .utf8).data(using: .utf8)
-        let starDatas = try String(contentsOf: starFile, encoding: .utf8).data(using: .utf8)
         
         let decoder = JSONDecoder()
-        mData = try decoder.decode(Dictionary<String,Array<String>>.self, from: marketDatas!)
-        starData = try decoder.decode(Array<String>.self, from: starDatas!)
+        marketData = try decoder.decode(Dictionary<String,DataOfDate>.self, from: marketDatas!)
     } catch {
+        return
+    }
+}
+
+public func writeMarketData() {
+    let fileManager = FileManager.default
+    let homeDir = fileManager.urls(for: .documentDirectory, in: .userDomainMask)[0]
+    
+    do {
+        let marketFile = homeDir.appendingPathComponent("MarketData")
+        let encoder = JSONEncoder()
+       // try encoder.encode(marketData).write(to: marketFile)
+        let data = try encoder.encode(marketData)
+        let marketDataString = String(data: data, encoding: .utf8)!
+        try marketDataString.write(to: marketFile, atomically: false, encoding: .utf8)
+    } catch {
+        
         return
     }
     
 }
 
-public func jsonFileWrite() {
+public func readHistoryData() {
     let fileManager = FileManager.default
     let homeDir = fileManager.urls(for: .documentDirectory, in: .userDomainMask)[0]
        
     do {
-        let marketFile = homeDir.appendingPathComponent("MarketData")
-        let starFile = homeDir.appendingPathComponent("StarData")
-       
+        let historyFile = homeDir.appendingPathComponent("HistoryData")
+        let histories = try String(contentsOf: historyFile, encoding: .utf8).data(using: .utf8)
         
-        let encoder = JSONEncoder()
-        try encoder.encode(mData).write(to: marketFile)
-        try encoder.encode(starData).write(to: starFile)
+        let decoder = JSONDecoder()
+        historyData = try decoder.decode(Array<History>.self, from: histories!)
+        historyData.sort(by: {$0.count > $1.count })
     } catch {
         return
     }
 }
 
-
-func forTableViewString(s: String) -> String {
-    
-    let words = s.split(separator: "/")
-    var ret = words[0]
-    if words[1] != "_" || words[2] != "_" {
-        ret += "(\(words[1])\(words[2]))"
+public func writeHistoryData() {
+    let fileManager = FileManager.default
+    let homeDir = fileManager.urls(for: .documentDirectory, in: .userDomainMask)[0]
+    do {
+        let historyFile = homeDir.appendingPathComponent("HistoryData")
+        let encoder = JSONEncoder()
+        let data = try encoder.encode(historyData)
+        let historyString = String(data: data, encoding: .utf8)
+        try historyString?.write(to: historyFile, atomically: false, encoding: .utf8)
+    } catch {
+        return
     }
-    if words[3] != "_" || words[4] != "_" {
-        if words[4] == "_" {
-            ret += "\(words[3])개"
-        } else if words[3] == "_" {
-            ret += "1\(words[4])"
-        } else {
-            ret += " \(words[3])\(words[4])"
-        }
-    }
-    return String(ret)
 }
