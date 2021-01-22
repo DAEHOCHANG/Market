@@ -15,6 +15,7 @@ class AddProduct: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource
 
     @IBOutlet weak var number: UITextField!
     @IBOutlet weak var name: UITextField!
+    @IBOutlet var addView: UIView!
     
    
     override func viewDidLoad() {
@@ -24,9 +25,12 @@ class AddProduct: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource
         setting()
     }
     
+  
+    
+    
     //뒤로가기 버튼
     @IBAction func backButton(_ sender: UIButton) {
-        
+        self.view.endEditing(true)
         self.presentingViewController?.dismiss(animated: true)
     }
     
@@ -42,7 +46,7 @@ class AddProduct: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource
         if marketData[getDate()] == nil {
             marketData[getDate()] = DataOfDate(date: getDate())
         }
-        marketData[getDate()]?.append(product: Product(name: name.text!, quantity: UInt(number.text!) ?? 1))
+        marketData[getDate()]?.append(product: Product(name: name.text!, quantity: UInt(number.text!) ?? 1, isBought: false))
         historyData.append(newElement: History(productName: name.text!, count: 1))
         writeMarketData()
         writeHistoryData()
@@ -62,13 +66,17 @@ class AddProduct: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource
         exitButton.title = "선택"
         exitButton.target = self
         exitButton.action = #selector(pickerExit)
-        exitButton.tintColor = .blue
+        //exitButton.tintColor = .darkGray
+        
         
         let toolbar = UIToolbar()
-        toolbar.tintColor = .darkGray
+        toolbar.tintColor = .systemBlue
         toolbar.frame = CGRect(x: 0, y: 0, width: 0, height: 35)
-        toolbar.setItems([exitButton], animated: true)
+        let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        
+        toolbar.setItems([flexSpace,exitButton], animated: true)
         number.inputAccessoryView = toolbar
+        number.isContextMenuInteractionEnabled = false
         
     }
     
@@ -76,6 +84,7 @@ class AddProduct: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource
         self.number.text = "\(numbering[selectedRow])"
         self.view.endEditing(true)
     }
+    
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return numbering.count
     }
@@ -94,3 +103,8 @@ class AddProduct: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource
 }
 
 
+extension UITextField {
+    open override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
+        return false
+    }
+}

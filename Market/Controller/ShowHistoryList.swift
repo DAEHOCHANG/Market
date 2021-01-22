@@ -64,7 +64,7 @@ extension ShowHistoryViewController: UITableViewDelegate, UITableViewDataSource{
         if marketData[getDate()] == nil {
             marketData[getDate()] = DataOfDate(date: getDate())
         }
-        let product = Product(name: historyData[indexPath.row].productName, quantity: 1)
+        let product = Product(name: historyData[indexPath.row].productName, quantity: 1, isBought: false)
         historyData[indexPath.row].count += 1
         marketData[getDate()]?.append(product: product)
         writeMarketData()

@@ -18,7 +18,6 @@ public func readMarketData() {
         
         let decoder = JSONDecoder()
         marketData = try decoder.decode(Dictionary<String,DataOfDate>.self, from: marketDatas!)
-        print(marketData)
     } catch {
         return
     }

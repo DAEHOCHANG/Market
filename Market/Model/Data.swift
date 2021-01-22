@@ -30,6 +30,7 @@ public func getDate() -> String{
 struct Product: Codable{
     var name: String
     var quantity: UInt
+    var isBought: Bool
     public func productToString() -> String {
         return "\(name) \(quantity)"
     }
@@ -99,6 +100,10 @@ extension DataOfDate {
             return nil
         }
         return ret[0]
+    }
+    
+    mutating func setProduct(at:Int, to product : Product) {
+        self.list[at] = product
     }
 }
 

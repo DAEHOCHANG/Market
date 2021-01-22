@@ -13,7 +13,8 @@ class ViewController: UIViewController  {
     @IBOutlet weak var calendar: FSCalendar!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var selectedDate: UILabel!
-
+    @IBOutlet weak var stackView: UIStackView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -32,6 +33,7 @@ class ViewController: UIViewController  {
         calendar.appearance.headerDateFormat = "YYYY년 M월"
         calendar.delegate = self
         calendar.dataSource = self
+        //calendar.scope = .week
         
         //테이블 뷰 설정
         tableView.delegate = self
@@ -43,9 +45,9 @@ class ViewController: UIViewController  {
         super.viewWillAppear(animated)
         self.tableView.reloadData()
         self.calendar.reloadData()
+        
     }
     
-
 }
 
 
@@ -109,6 +111,7 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
     //셀을 드래그 했을 때 액션
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
+        
         //삭제, 데이터에서 삭제해 줘야함
         let deleteAction = UIContextualAction(style: .destructive, title:  "삭제", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
             marketData[getDate()]?.removeProduct(at: indexPath.row)
@@ -124,17 +127,33 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
         })
         
         //수정 버튼
-        //
-        let modifyAction = UIContextualAction(style: .normal, title:  "수정", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
-            let vc = self.storyboard?.instantiateViewController(identifier: "AddStarList") as! AddProduct
-            vc.modalPresentationStyle = .fullScreen
-            self.present(vc, animated: true, completion: nil)
+        //=> 구매 완료로 변경
+        
+        let modifyAction1 = UIContextualAction(style: .normal, title:  "구매완료", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
+            let cell = tableView.cellForRow(at: indexPath)
+            cell?.backgroundColor = .darkGray
+            var toProduct = marketData[getDate()]?.getList()[indexPath.row]
+            toProduct?.isBought = true
+            marketData[getDate()]?.setProduct(at:indexPath.row, to: toProduct!)
             
             success(true)
         })
         
-        
-        return UISwipeActionsConfiguration(actions:[deleteAction,modifyAction])
+        //구매완료 해제
+        let modifyAction2 = UIContextualAction(style: .normal, title:  "구매취소", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
+            let cell = tableView.cellForRow(at: indexPath)
+            cell?.backgroundColor = .clear
+            var toProduct = marketData[getDate()]?.getList()[indexPath.row]
+            toProduct?.isBought = false
+            marketData[getDate()]?.setProduct(at:indexPath.row, to: toProduct!)
+            success(true)
+        })
+        let check = marketData[getDate()]?.getList()[indexPath.row]
+        if check?.isBought == false {
+            return UISwipeActionsConfiguration(actions:[deleteAction,modifyAction1])
+        } else {
+            return UISwipeActionsConfiguration(actions:[deleteAction,modifyAction2])
+        }
         
     }
 }
