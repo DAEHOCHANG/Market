@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 //checkout test!
-class ShowStarListViewController: UIViewController {
+class ShowHistoryViewController: UIViewController {
     
     @IBOutlet weak var starList: UITableView!
     
@@ -32,16 +32,16 @@ class ShowStarListViewController: UIViewController {
     }
 }
 
-extension ShowStarListViewController: UITableViewDelegate, UITableViewDataSource{
+extension ShowHistoryViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return starData.count
+        return historyData.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "starCell") else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "historyCell") else {
             fatalError("error!")
         }
-        cell.textLabel?.text = forTableViewString(s: starData[indexPath.row]) 
+        cell.textLabel?.text = historyData[indexPath.row].toString()
         return cell
     }
     
@@ -49,21 +49,24 @@ extension ShowStarListViewController: UITableViewDelegate, UITableViewDataSource
     //드래그해서 삭제하는 경우임
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let deleteAction = UIContextualAction(style: .destructive, title:  "삭제", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
-            starData.remove(at: indexPath.row)
+            
+            historyData.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
-            jsonFileWrite()
+            writeHistoryData()
             success(true)
         })
         return UISwipeActionsConfiguration(actions:[deleteAction])
     }
     
+    //history에서 클릭해서 추가할 경우
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //mData[getDate()]?.append((tableView.cellForRow(at: indexPath)?.textLabel?.text!)!)
-        if mData[getDate()] == nil {
-            mData[getDate()] = []
+        
+        if marketData[getDate()] == nil {
+            marketData[getDate()] = DataOfDate(date: getDate())
         }
-        mData[getDate()]?.append(starData[indexPath.row])
-        jsonFileWrite()
+        let product = Product(name: historyData[indexPath.row].productName, quantity: 1)
+        marketData[getDate()]?.append(product: product)
+        writeMarketData()
         self.presentingViewController?.dismiss(animated: true)
     }
 }

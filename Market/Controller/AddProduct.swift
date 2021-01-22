@@ -46,31 +46,8 @@ class AddProduct: UIViewController {
         modify = false
     }
     @IBAction func plusButton(_ sender: UIButton) {
-        //let s = "\(plusName.text!)/\(weigth.text!)/\(weigthUnit.text!)/\(number.text!)/\(numberUnit.text!)"
-        if plusName.text! == "" {
-            return
-        }
-        var ss:String = "\(plusName.text!)/"
-        ss += weigth.text! == "" ? "_/" : "\(weigth.text!)/"
-        ss += weigthUnit.text! == "" ? "_/" : "\(weigthUnit.text!)/"
-        ss += number.text! == "" ? "_/" : "\(number.text!)/"
-        ss += numberUnit.text! == "" ? "_/" : "\(numberUnit.text!)/"
         
-        guard modify == false else {
-            mData[getDate()]?[modifyRow] = ss
-            modify = false
-            jsonFileWrite()
-            
-            self.presentingViewController?.dismiss(animated: true)
-            return
-        }
         
-        if mData[getDate()] == nil {
-            mData[getDate()] = []
-        }
-        mData[getDate()]?.append(ss)
-        starData.append(ss)
-        jsonFileWrite()
         self.presentingViewController?.dismiss(animated: true)
     }
 }

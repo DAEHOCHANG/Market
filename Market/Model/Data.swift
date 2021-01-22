@@ -30,6 +30,9 @@ public func getDate() -> String{
 struct Product: Codable{
     var name: String
     var quantity: UInt
+    public func productToString() -> String {
+        return "\(name) \(quantity)"
+    }
 }
 
 struct DataOfDate: Codable{
@@ -40,7 +43,13 @@ struct DataOfDate: Codable{
             return list.count
         }
     }
+    init(date:String) {
+        self.date = date
+        self.list = []
+    }
 }
+
+
 
 extension DataOfDate {
     mutating func setDate(date: Date) {
@@ -52,6 +61,7 @@ extension DataOfDate {
     func getDate() -> String {
         return self.date
     }
+   
 }
 
 
@@ -101,4 +111,7 @@ struct History: Codable{
     var productName: String
     var count: UInt
     var pr: Int = 0
+    public func toString() -> String {
+        return "\(productName)"
+    }
 }

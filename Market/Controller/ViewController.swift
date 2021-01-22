@@ -96,7 +96,7 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
         }
         
       
-        let insertString:String = productToString(product: list[indexPath.row])
+        let insertString:String = list[indexPath.row].productToString()
         cell.textLabel?.text = insertString
         cell.textLabel?.textColor = .black
         return cell
@@ -126,7 +126,7 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
             vc.modalPresentationStyle = .fullScreen
             vc.modify = true
             vc.modifyRow = indexPath.row
-            //vc.inputString = marketData[getDate()]?.[indexPath.row]
+            vc.inputString = marketData[getDate()]?.getList()[indexPath.row].productToString()
             vc.pm = .modify
             self.present(vc, animated: true, completion: nil)
             
@@ -137,8 +137,4 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
         return UISwipeActionsConfiguration(actions:[deleteAction,modifyAction])
         
     }
-}
-
-func productToString(product pr:Product) -> String {
-    return "\(pr.name) \(pr.quantity)"
 }

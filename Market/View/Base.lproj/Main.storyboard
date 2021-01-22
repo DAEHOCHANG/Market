@@ -131,10 +131,10 @@
             </objects>
             <point key="canvasLocation" x="129" y="-650"/>
         </scene>
-        <!--Show Star List View Controller-->
+        <!--Show History View Controller-->
         <scene sceneID="gGw-HO-WrQ">
             <objects>
-                <viewController id="9ST-1i-x6g" customClass="ShowStarListViewController" customModule="Market" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="9ST-1i-x6g" customClass="ShowHistoryViewController" customModule="Market" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Roa-Bb-dzq">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -143,7 +143,7 @@
                                 <rect key="frame" x="0.0" y="88.333333333333314" width="414" height="773.66666666666674"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="starCell" id="IHZ-8N-7ZB" userLabel="TableViewCell">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="historyCell" id="IHZ-8N-7ZB" userLabel="TableViewCell">
                                         <rect key="frame" x="0.0" y="28" width="414" height="43.666667938232422"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="IHZ-8N-7ZB" id="Hfx-Tn-6nc">
