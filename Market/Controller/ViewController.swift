@@ -154,6 +154,7 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
         } else {
             return UISwipeActionsConfiguration(actions:[deleteAction,modifyAction2])
         }
-        
     }
+    
+
 }
