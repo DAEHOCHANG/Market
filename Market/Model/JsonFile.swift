@@ -18,6 +18,7 @@ public func readMarketData() {
         
         let decoder = JSONDecoder()
         marketData = try decoder.decode(Dictionary<String,DataOfDate>.self, from: marketDatas!)
+        print(marketData)
     } catch {
         return
     }
@@ -30,8 +31,12 @@ public func writeMarketData() {
     do {
         let marketFile = homeDir.appendingPathComponent("MarketData")
         let encoder = JSONEncoder()
-        try encoder.encode(marketData).write(to: marketFile)
+       // try encoder.encode(marketData).write(to: marketFile)
+        let data = try encoder.encode(marketData)
+        let marketDataString = String(data: data, encoding: .utf8)!
+        try marketDataString.write(to: marketFile, atomically: false, encoding: .utf8)
     } catch {
+        
         return
     }
     
@@ -47,6 +52,7 @@ public func readHistoryData() {
         
         let decoder = JSONDecoder()
         historyData = try decoder.decode(Array<History>.self, from: histories!)
+        historyData.sort(by: {$0.count > $1.count })
     } catch {
         return
     }
@@ -58,7 +64,9 @@ public func writeHistoryData() {
     do {
         let historyFile = homeDir.appendingPathComponent("HistoryData")
         let encoder = JSONEncoder()
-        try encoder.encode(historyData).write(to: historyFile)
+        let data = try encoder.encode(historyData)
+        let historyString = String(data: data, encoding: .utf8)
+        try historyString?.write(to: historyFile, atomically: false, encoding: .utf8)
     } catch {
         return
     }

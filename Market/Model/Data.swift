@@ -115,3 +115,17 @@ struct History: Codable{
         return "\(productName)"
     }
 }
+
+extension Array where Element == History {
+    mutating func append(newElement: History) {
+        for i in 0..<self.count {
+            if self[i].productName == newElement.productName {
+                self[i].count += 1
+                return
+            }
+        }
+        append(newElement)
+    }
+}
+    
+

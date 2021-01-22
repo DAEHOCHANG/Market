@@ -17,6 +17,10 @@ class ViewController: UIViewController  {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //데이터 받기
+        readMarketData()
+        readHistoryData()
+        
         //날짜 텍스트 설정
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "YYYY-MM-dd"
@@ -124,10 +128,6 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
         let modifyAction = UIContextualAction(style: .normal, title:  "수정", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
             let vc = self.storyboard?.instantiateViewController(identifier: "AddStarList") as! AddProduct
             vc.modalPresentationStyle = .fullScreen
-            vc.modify = true
-            vc.modifyRow = indexPath.row
-            vc.inputString = marketData[getDate()]?.getList()[indexPath.row].productToString()
-            vc.pm = .modify
             self.present(vc, animated: true, completion: nil)
             
             success(true)
