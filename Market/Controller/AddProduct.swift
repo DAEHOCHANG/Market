@@ -10,7 +10,7 @@ import UIKit
 
 enum PlusModify { case modify, plus}
 
-class AddStarList: UIViewController {
+class AddProduct: UIViewController {
     @IBOutlet weak var plusName: UITextField!
     @IBOutlet weak var weigth: UITextField!
     @IBOutlet weak var weigthUnit: UITextField!

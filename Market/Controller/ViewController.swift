@@ -16,22 +16,27 @@ class ViewController: UIViewController  {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        jsonFileRead()
+        
+        //날짜 텍스트 설정
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "YYYY-MM-dd"
         setDate(date: dateFormatter.string(from: calendar.today!))
         selectedDate.text = "Date : \(getDate())"
+        
+        //캘린더 설정
         calendar.locale = Locale(identifier: "ko_KR")
         calendar.appearance.headerDateFormat = "YYYY년 M월"
         calendar.delegate = self
         calendar.dataSource = self
+        
+        //테이블 뷰 설정
         tableView.delegate = self
         tableView.dataSource = self
     }
 
+    //다시 나타날 경우 캘린더, ㅌ테이블 뷰 reload해줘야 할 것
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        arr = mData[getDate()]
         self.tableView.reloadData()
         self.calendar.reloadData()
     }
@@ -48,7 +53,6 @@ extension ViewController: FSCalendarDataSource, FSCalendarDelegate {
         dateFormatter.dateFormat = "YYYY-MM-dd"
         setDate(date: dateFormatter.string(from: date))
         selectedDate.text = "Date : \(getDate())"
-        arr = mData[getDate()]
         self.tableView.reloadData()
         
     }
@@ -59,14 +63,13 @@ extension ViewController: FSCalendarDataSource, FSCalendarDelegate {
         dateFormatter.dateFormat = "YYYY-MM-dd"
         selectedDate.text = "Date"
         setDate(date: "")
-        arr = nil
     }
 
     //이벤트 띄우는 메서드
     func calendar(_ calendar: FSCalendar, numberOfEventsFor date: Date) -> Int {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "YYYY-MM-dd"
-        if mData[dateFormatter.string(from: date)] != nil {
+        if marketData[dateFormatter.string(from: date)] != nil {
             return 1
         }
         return 0
@@ -75,41 +78,55 @@ extension ViewController: FSCalendarDataSource, FSCalendarDelegate {
 }
 
 extension ViewController: UITableViewDataSource, UITableViewDelegate {
+    //테이블뷰에 몇개나 올라갈 것인강!
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.arr?.count ?? 0
+        if let cnt = marketData[getDate()]?.count {
+            return cnt
+        }
+        return 0
     }
     
+    //각 셀에 무엇이 올라갈 것인가
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "tableview_cell") else {
-            fatalError("fdsfsad")
+            fatalError("error")
         }
-        let tmp = arr ?? []
-        if tmp.count > 0{
-            let insertString:String = forTableViewString(s:tmp[indexPath.row])
-            cell.textLabel?.text = insertString
+        guard let list = marketData[getDate()]?.getList() else {
+            return cell
         }
+        
+      
+        let insertString:String = productToString(product: list[indexPath.row])
+        cell.textLabel?.text = insertString
         cell.textLabel?.textColor = .black
         return cell
     }
     
+    //셀을 드래그 했을 때 액션
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        
+        //삭제, 데이터에서 삭제해 줘야함
         let deleteAction = UIContextualAction(style: .destructive, title:  "삭제", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
-            self.arr?.remove(at: indexPath.row)
+            marketData[getDate()]?.removeProduct(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
-            mData[getDate()]?.remove(at: indexPath.row)
-            if mData[getDate()]?.count == 0 {
-                mData.removeValue(forKey: getDate())
+            
+            if marketData[getDate()]?.count == 0 {
+                marketData.removeValue(forKey: getDate())
             }
-            jsonFileWrite()
+            
+            writeMarketData()
             self.calendar.reloadData()
             success(true)
         })
+        
+        //수정 버튼
+        //
         let modifyAction = UIContextualAction(style: .normal, title:  "수정", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
-            let vc = self.storyboard?.instantiateViewController(identifier: "AddStarList") as! AddStarList
+            let vc = self.storyboard?.instantiateViewController(identifier: "AddStarList") as! AddProduct
             vc.modalPresentationStyle = .fullScreen
             vc.modify = true
             vc.modifyRow = indexPath.row
-            vc.inputString = mData[getDate()]?[indexPath.row]
+            //vc.inputString = marketData[getDate()]?.[indexPath.row]
             vc.pm = .modify
             self.present(vc, animated: true, completion: nil)
             
@@ -122,3 +139,6 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
     }
 }
 
+func productToString(product pr:Product) -> String {
+    return "\(pr.name) \(pr.quantity)"
+}

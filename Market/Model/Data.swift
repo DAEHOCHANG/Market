@@ -35,6 +35,11 @@ struct Product: Codable{
 struct DataOfDate: Codable{
     private var date: String
     private var list: Array<Product>
+    var count: Int {
+        get {
+            return list.count
+        }
+    }
 }
 
 extension DataOfDate {
@@ -51,6 +56,10 @@ extension DataOfDate {
 
 
 extension DataOfDate {
+    public func getList() -> Array<Product> {
+        return list
+    }
+    
     mutating func removeProduct(name: String) {
         list = self.list.filter({
             if name != $0.name {
@@ -58,6 +67,10 @@ extension DataOfDate {
             }
             return false
         })
+    }
+    
+    mutating func removeProduct(at: Int) {
+        list.remove(at: at)
     }
     
     mutating func append(product: Product) {
