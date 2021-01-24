@@ -13,14 +13,12 @@ class ShowHistoryViewController: UIViewController, UIGestureRecognizerDelegate, 
    
     
     @IBOutlet weak var historyList: UITableView!
-    
+    var cellNum = 0
     override func viewDidLoad() {
         super.viewDidLoad()
         
         historyList.delegate = self
         historyList.dataSource = self
-        
-
     }
 
     @IBAction func swipeBack(_ sender: UIScreenEdgePanGestureRecognizer) {
@@ -38,21 +36,6 @@ class ShowHistoryViewController: UIViewController, UIGestureRecognizerDelegate, 
     }
     
 
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return numbering.count
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return String(numbering[row])
-    }
-
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        selectedRow = row
-    }
 }
 
 extension ShowHistoryViewController: UITableViewDelegate, UITableViewDataSource{
@@ -81,27 +64,68 @@ extension ShowHistoryViewController: UITableViewDelegate, UITableViewDataSource{
         return UISwipeActionsConfiguration(actions:[deleteAction])
     }
     
-    //history에서 클릭해서 추가할 경우
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    @objc func pickerExit() {
 
+        
         if marketData[getDate()] == nil {
             marketData[getDate()] = DataOfDate(date: getDate())
         }
         
-        let product = Product(name: historyData[indexPath.row].productName, quantity: 1, isBought: false)
-        historyData[indexPath.row].count += 1
+        let product = Product(name: historyData[cellNum].productName, quantity: UInt(numbering[selectedRow]), isBought: false)
+        historyData[cellNum].count += 1
         historyData.sort(by: {$0.count > $1.count})
         
         marketData[getDate()]?.append(product: product)
         
         writeMarketData()
         writeHistoryData()
-        
-        
+        self.view.endEditing(true)
         self.presentingViewController?.dismiss(animated: true)
     }
     
-    @objc func pickerExit() {
-        
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return numbering.count
     }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return String(numbering[row])
+    }
+
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        selectedRow = row
+    }
+    
+    
+    //history에서 클릭해서 추가할 경우
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        cellNum = indexPath.row
+        let picker = UIPickerView()
+        picker.delegate = self
+        picker.frame = CGRect(x: 0, y: self.view.fs_bottom-225, width: UIScreen.main.bounds.width, height: 225)
+        
+        picker.backgroundColor = .systemGray4
+        
+        let exitButton = UIBarButtonItem()
+        exitButton.title = "선택"
+        exitButton.target = self
+        exitButton.action = #selector(pickerExit)
+        //exitButton.tintColor = .darkGray
+        
+        
+        let toolbar = UIToolbar()
+        toolbar.tintColor = .systemBlue
+        //UIScreen 은 뭐하는놈이길래,....
+        toolbar.frame = CGRect(x: 0, y: picker.fs_top-35, width: UIScreen.main.bounds.width, height: 35)
+        let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        toolbar.setItems([flexSpace,exitButton], animated: false)
+        
+        self.view.addSubview(toolbar)
+        self.view.addSubview(picker)
+       // self.presentingViewController?.dismiss(animated: true)
+    }
+
 }

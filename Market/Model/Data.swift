@@ -33,8 +33,13 @@ struct Product: Codable{
     var name: String
     var quantity: UInt
     var isBought: Bool
+    var unit: String = ""
     public func productToString() -> String {
-        return "\(name) \(quantity)"
+        if unit == ""{
+            return "\(name) \(quantity)개"
+        } else {
+            return "\(name) \(quantity) \(unit)"
+        }
     }
 }
 
