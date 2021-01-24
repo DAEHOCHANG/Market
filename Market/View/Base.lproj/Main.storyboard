@@ -26,6 +26,9 @@
                                             <userDefinedRuntimeAttribute type="color" keyPath="titleWeekendColor">
                                                 <color key="value" systemColor="systemRedColor"/>
                                             </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="todayColor">
+                                                <color key="value" red="0.12156862745098039" green="0.46666666666666667" blue="0.85882352941176465" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
                                             <outlet property="delegate" destination="BYZ-38-t0r" id="Jnq-bh-LXf"/>
@@ -179,6 +182,7 @@
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="no9-Mg-gUE"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="wY0-sq-4cE" firstAttribute="bottom" secondItem="no9-Mg-gUE" secondAttribute="bottom" id="4Eb-8A-Z8f"/>
                             <constraint firstItem="dUv-Js-Vvy" firstAttribute="top" secondItem="no9-Mg-gUE" secondAttribute="top" constant="10" id="7dn-r7-7IT"/>
@@ -189,13 +193,22 @@
                             <constraint firstItem="wY0-sq-4cE" firstAttribute="trailing" secondItem="no9-Mg-gUE" secondAttribute="trailing" id="vq9-bn-kkE"/>
                             <constraint firstItem="wY0-sq-4cE" firstAttribute="top" secondItem="dUv-Js-Vvy" secondAttribute="bottom" constant="5.3300000000000001" id="xmt-nT-fNE"/>
                         </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="lr6-yC-4lh" appends="YES" id="JMZ-E3-YRv"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" id="RsM-tm-Wie"/>
                     <connections>
-                        <outlet property="starList" destination="wY0-sq-4cE" id="mgx-Jh-F8u"/>
+                        <outlet property="historyList" destination="wY0-sq-4cE" id="mgx-Jh-F8u"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kAO-eT-fWH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <screenEdgePanGestureRecognizer minimumNumberOfTouches="1" id="lr6-yC-4lh">
+                    <rectEdge key="edges" left="YES"/>
+                    <connections>
+                        <action selector="swipeBack:" destination="9ST-1i-x6g" id="eyU-jS-MVD"/>
+                    </connections>
+                </screenEdgePanGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="929" y="-934"/>
         </scene>
@@ -259,6 +272,7 @@
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="fQq-gp-OLH"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="aDK-X3-6BR" firstAttribute="top" secondItem="fQq-gp-OLH" secondAttribute="top" id="0QF-cs-0Uc"/>
                             <constraint firstItem="alA-ez-Tnr" firstAttribute="centerX" secondItem="3lJ-IU-LGT" secondAttribute="centerX" id="3H0-1A-MRj"/>
@@ -277,6 +291,9 @@
                             <constraint firstItem="3SG-Ey-2kp" firstAttribute="leading" secondItem="fQq-gp-OLH" secondAttribute="leading" constant="10" id="wae-T1-fUa"/>
                             <constraint firstItem="alA-ez-Tnr" firstAttribute="top" secondItem="fQq-gp-OLH" secondAttribute="top" constant="10" id="wja-L9-Tpm"/>
                         </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="KoI-lU-1TE" appends="YES" id="az7-1v-Nby"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" id="xpW-aC-sUw"/>
                     <connections>
@@ -286,6 +303,12 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yRA-fJ-6XK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <screenEdgePanGestureRecognizer minimumNumberOfTouches="1" id="KoI-lU-1TE">
+                    <rectEdge key="edges" left="YES"/>
+                    <connections>
+                        <action selector="swipeBack:" destination="wd1-Yz-Vgk" id="inM-tU-ShX"/>
+                    </connections>
+                </screenEdgePanGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="928.98550724637687" y="-291.96428571428572"/>
         </scene>

@@ -31,6 +31,7 @@ class ViewController: UIViewController  {
         //캘린더 설정
         calendar.locale = Locale(identifier: "ko_KR")
         calendar.appearance.headerDateFormat = "YYYY년 M월"
+
         calendar.delegate = self
         calendar.dataSource = self
         //calendar.scope = .week
@@ -60,7 +61,15 @@ extension ViewController: FSCalendarDataSource, FSCalendarDelegate {
         setDate(date: dateFormatter.string(from: date))
         selectedDate.text = "Date : \(getDate())"
         self.tableView.reloadData()
+        self.calendar.appearance.todayColor = UIColor.clear
         
+        
+        if Calendar.current.isDateInWeekend(Date()) {
+            self.calendar.appearance.titleTodayColor = UIColor.red
+        } else {
+
+            self.calendar.appearance.titleTodayColor = UIColor.black
+        }
     }
     
     // 날짜 선택 해제 시 콜백 메소드
@@ -154,6 +163,7 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
         } else {
             return UISwipeActionsConfiguration(actions:[deleteAction,modifyAction2])
         }
-        
     }
+    
+
 }

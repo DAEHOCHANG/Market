@@ -8,9 +8,6 @@
 import Foundation
 import UIKit
 
-let numbering: [Int] = [1,2,3,4,5,6,7,8,9,10]
-var selectedRow = 0
-
 class AddProduct: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
 
     @IBOutlet weak var number: UITextField!
@@ -25,7 +22,11 @@ class AddProduct: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource
         setting()
     }
     
-  
+    @IBAction func swipeBack(_ sender: UIScreenEdgePanGestureRecognizer) {
+        self.modalTransitionStyle = .crossDissolve
+        self.presentingViewController?.dismiss(animated: true)
+    }
+    
     
     
     //뒤로가기 버튼
@@ -75,12 +76,13 @@ class AddProduct: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource
         toolbar.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 35)
         let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         
-        toolbar.setItems([exitButton,flexSpace], animated: false)
+        toolbar.setItems([flexSpace,exitButton], animated: false)
         number.inputAccessoryView = toolbar
     }
     
     @objc func pickerExit() {
         self.number.text = "\(numbering[selectedRow])"
+        selectedRow = 0
         self.view.endEditing(true)
     }
     

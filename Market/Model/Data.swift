@@ -15,6 +15,8 @@ import Foundation
 var curDate:String = ""
 var marketData: Dictionary<String, DataOfDate> = [:]
 var historyData: Array<History> = []
+let numbering: [Int] = [1,2,3,4,5,6,7,8,9,10]
+var selectedRow = 0
 
 public func setDate(date: String) {
     curDate = date
@@ -31,8 +33,13 @@ struct Product: Codable{
     var name: String
     var quantity: UInt
     var isBought: Bool
+    var unit: String = ""
     public func productToString() -> String {
-        return "\(name) \(quantity)"
+        if unit == ""{
+            return "\(name) \(quantity)개"
+        } else {
+            return "\(name) \(quantity) \(unit)"
+        }
     }
 }
 
