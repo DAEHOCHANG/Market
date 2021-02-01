@@ -31,7 +31,7 @@ class ViewController: UIViewController  {
         //캘린더 설정
         calendar.locale = Locale(identifier: "ko_KR")
         calendar.appearance.headerDateFormat = "YYYY년 M월"
-
+        
         calendar.delegate = self
         calendar.dataSource = self
         //calendar.scope = .week
@@ -52,7 +52,7 @@ class ViewController: UIViewController  {
 }
 
 
-
+//callendar
 extension ViewController: FSCalendarDataSource, FSCalendarDelegate {
     //날짜 선택시 메소드
     public func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
@@ -90,8 +90,12 @@ extension ViewController: FSCalendarDataSource, FSCalendarDelegate {
         return 0
     }
     
+
+    
 }
 
+
+//테이블 뷰
 extension ViewController: UITableViewDataSource, UITableViewDelegate {
     //테이블뷰에 몇개나 올라갈 것인강!
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -114,6 +118,12 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
         let insertString:String = list[indexPath.row].productToString()
         cell.textLabel?.text = insertString
         cell.textLabel?.textColor = .black
+        if list[indexPath.row].isBought == true {
+            cell.backgroundColor = .darkGray
+        } else {
+            
+            cell.backgroundColor = .clear
+        }
         return cell
     }
     
@@ -139,22 +149,21 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
         //=> 구매 완료로 변경
         
         let modifyAction1 = UIContextualAction(style: .normal, title:  "구매완료", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
-            let cell = tableView.cellForRow(at: indexPath)
-            cell?.backgroundColor = .darkGray
             var toProduct = marketData[getDate()]?.getList()[indexPath.row]
             toProduct?.isBought = true
             marketData[getDate()]?.setProduct(at:indexPath.row, to: toProduct!)
-            
+            self.tableView.reloadData()
+            writeMarketData()
             success(true)
         })
         
         //구매완료 해제
         let modifyAction2 = UIContextualAction(style: .normal, title:  "구매취소", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
-            let cell = tableView.cellForRow(at: indexPath)
-            cell?.backgroundColor = .clear
             var toProduct = marketData[getDate()]?.getList()[indexPath.row]
             toProduct?.isBought = false
             marketData[getDate()]?.setProduct(at:indexPath.row, to: toProduct!)
+            self.tableView.reloadData()
+            writeMarketData()
             success(true)
         })
         let check = marketData[getDate()]?.getList()[indexPath.row]
