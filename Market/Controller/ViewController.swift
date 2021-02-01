@@ -63,7 +63,6 @@ extension ViewController: FSCalendarDataSource, FSCalendarDelegate {
         self.tableView.reloadData()
         self.calendar.appearance.todayColor = UIColor.clear
         
-        
         if Calendar.current.isDateInWeekend(Date()) {
             self.calendar.appearance.titleTodayColor = UIColor.red
         } else {
