@@ -51,6 +51,8 @@ class ViewController: UIViewController  {
         self.tableView.reloadData()
         self.calendar.reloadData()
         
+        
+        
     }
     @objc func longPress(_ sender: UILongPressGestureRecognizer) {
         print("hi")
