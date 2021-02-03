@@ -34,7 +34,11 @@ class ViewController: UIViewController  {
         
         calendar.delegate = self
         calendar.dataSource = self
-        //calendar.scope = .week
+        
+        
+        let longPressGesture = UILongPressGestureRecognizer(target: FSCalendarCell.self, action: #selector(longPress))
+        calendar.daysContainer.addGestureRecognizer(longPressGesture)
+        //calendar.daysContainer.gestureRecognizers = [longPressGesture]
         
         //테이블 뷰 설정
         tableView.delegate = self
@@ -48,9 +52,11 @@ class ViewController: UIViewController  {
         self.calendar.reloadData()
         
     }
-    
-}
+    @objc func longPress(_ sender: UILongPressGestureRecognizer) {
+        print("hi")
+    }
 
+}
 
 //callendar
 extension ViewController: FSCalendarDataSource, FSCalendarDelegate {
@@ -88,8 +94,6 @@ extension ViewController: FSCalendarDataSource, FSCalendarDelegate {
         }
         return 0
     }
-    
-
     
 }
 
