@@ -47,6 +47,8 @@ class ViewController: UIViewController  {
         self.tableView.reloadData()
         self.calendar.reloadData()
         
+        
+        
     }
     
 }
