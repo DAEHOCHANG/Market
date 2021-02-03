@@ -8,7 +8,6 @@
 import UIKit
 import FSCalendar
 
-
 class ViewController: UIViewController  {
     @IBOutlet weak var calendar: FSCalendar!
     @IBOutlet weak var tableView: UITableView!
@@ -31,11 +30,10 @@ class ViewController: UIViewController  {
         //캘린더 설정
         calendar.locale = Locale(identifier: "ko_KR")
         calendar.appearance.headerDateFormat = "YYYY년 M월"
-        
         calendar.delegate = self
         calendar.dataSource = self
-        //calendar.scope = .week
-        
+        calendar.register(customCell.self, forCellReuseIdentifier: "customCell")
+
         //테이블 뷰 설정
         tableView.delegate = self
         tableView.dataSource = self
@@ -46,9 +44,10 @@ class ViewController: UIViewController  {
         super.viewWillAppear(animated)
         self.tableView.reloadData()
         self.calendar.reloadData()
-        
-        
-        
+    }
+ 
+    @objc func doIt(_ gestureRecognizer: UILongPressGestureRecognizer) {
+        print("hi")
     }
     
 }
@@ -92,8 +91,13 @@ extension ViewController: FSCalendarDataSource, FSCalendarDelegate {
         return 0
     }
     
+    func calendar(_ calendar: FSCalendar, cellFor date: Date, at position: FSCalendarMonthPosition) -> FSCalendarCell {
+        let cell = calendar.dequeueReusableCell(withIdentifier: "customCell", for: date, at: position)
+        let longPressedGesture = UILongPressGestureRecognizer(target: FSCalendarCell.self, action: #selector(doIt))
+        cell.addGestureRecognizer(longPressedGesture)
+        return cell
+    }
 
-    
 }
 
 
