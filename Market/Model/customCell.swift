@@ -12,19 +12,26 @@ class customCell: FSCalendarCell, UIGestureRecognizerDelegate {
     
     @IBOutlet weak var gestureview: UIView!
     
+    required override init!(frame: CGRect) {
+        super.init(frame: frame)
+        
+    }
+    
+    required init!(coder aDecoder: NSCoder!) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        let gesture = UILongPressGestureRecognizer(target: self, action: #selector(doIt(_:)))
-        gestureview.addGestureRecognizer(gesture)
+        
     }
     
     static func nib() -> UINib {
         return UINib(nibName: "customCell", bundle: nil)
     }
+    
     @objc func doIt(_ gesture: UILongPressGestureRecognizer) {
-        print("hi")
     }
    
 }

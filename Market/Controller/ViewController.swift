@@ -89,9 +89,8 @@ extension ViewController: FSCalendarDataSource, FSCalendarDelegate {
     }
     
     func calendar(_ calendar: FSCalendar, cellFor date: Date, at position: FSCalendarMonthPosition) -> FSCalendarCell {
-        print("1")
+
         let cell = calendar.dequeueReusableCell(withIdentifier: "customCell", for: date, at: position) as! customCell
-        print("2")
         return cell
     }
     
