@@ -11,10 +11,12 @@ import FSCalendar
 class customCell: FSCalendarCell, UIGestureRecognizerDelegate {
     
     @IBOutlet weak var gestureview: UIView!
+    var date:String = ""
     
     required override init!(frame: CGRect) {
         super.init(frame: frame)
-        
+        let gesture = UILongPressGestureRecognizer(target: self, action: #selector(copyPaste(_:)))
+        self.addGestureRecognizer(gesture)
     }
     
     required init!(coder aDecoder: NSCoder!) {
@@ -31,7 +33,8 @@ class customCell: FSCalendarCell, UIGestureRecognizerDelegate {
         return UINib(nibName: "customCell", bundle: nil)
     }
     
-    @objc func doIt(_ gesture: UILongPressGestureRecognizer) {
+    @objc func copyPaste(_ gesture: UILongPressGestureRecognizer) {
+       
     }
    
 }
