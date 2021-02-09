@@ -46,6 +46,10 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate  {
         self.calendar.reloadData()
     }
 
+    @IBAction func dateCopy(_ sender: Any) {
+    }
+    @IBAction func datePaste(_ sender: Any) {
+    }
     
 }
 
