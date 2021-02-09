@@ -8,13 +8,12 @@
 import UIKit
 import FSCalendar
 
-
-class ViewController: UIViewController  {
+class ViewController: UIViewController, UIGestureRecognizerDelegate  {
     @IBOutlet weak var calendar: FSCalendar!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var selectedDate: UILabel!
     @IBOutlet weak var stackView: UIStackView!
-    
+    var copiedData:DataOfDate? = nil
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -31,15 +30,8 @@ class ViewController: UIViewController  {
         //캘린더 설정
         calendar.locale = Locale(identifier: "ko_KR")
         calendar.appearance.headerDateFormat = "YYYY년 M월"
-        
         calendar.delegate = self
         calendar.dataSource = self
-        
-        
-        let longPressGesture = UILongPressGestureRecognizer(target: FSCalendarCell.self, action: #selector(longPress))
-        calendar.daysContainer.addGestureRecognizer(longPressGesture)
-        //calendar.daysContainer.gestureRecognizers = [longPressGesture]
-        
         //테이블 뷰 설정
         tableView.delegate = self
         tableView.dataSource = self
@@ -50,7 +42,39 @@ class ViewController: UIViewController  {
         super.viewWillAppear(animated)
         self.tableView.reloadData()
         self.calendar.reloadData()
+    }
+
+    @IBAction func dateCopy(_ sender: Any) {
+        guard let data = marketData[getDate()] else {
+            //경고
+            let warning = UIAlertController(title: "에러", message: "복사할 데이터가 없습니다.", preferredStyle: .alert)
+            let onAction = UIAlertAction(title: "확인", style: .default, handler: nil)
+            warning.addAction(onAction)
+            present(warning, animated: true, completion: nil)
+            return
+        }
+        self.copiedData = data
+    }
+    @IBAction func datePaste(_ sender: Any) {
+        guard let data = self.copiedData else {
+            //경고
+            let warning = UIAlertController(title: "에러", message: "붙여넣을 데이터가 없습니다.", preferredStyle: .alert)
+            let onAction = UIAlertAction(title: "확인", style: .default, handler: nil)
+            warning.addAction(onAction)
+            present(warning, animated: true, completion: nil)
+            return
+        }
+        marketData[getDate()] = data
+        self.calendar.reloadData()
+        self.tableView.reloadData()
+        writeMarketData()
+        self.copiedData = nil
         
+        let list = data.getList()
+        for tmp in list {
+            historyData.append(newElement: History(productName: tmp.name, count: 1))
+        }
+        writeHistoryData()
         
         
     }
@@ -97,6 +121,20 @@ extension ViewController: FSCalendarDataSource, FSCalendarDelegate {
         return 0
     }
     
+
+    func calendar(_ calendar: FSCalendar, cellFor date: Date, at position: FSCalendarMonthPosition) -> FSCalendarCell {
+
+        let cell = calendar.dequeueReusableCell(withIdentifier: "customCell", for: date, at: position) as! customCell
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "YYYY-MM-dd"
+        cell.date = dateFormatter.string(from: date)
+
+        
+        return cell
+    }
+    
+
 }
 
 

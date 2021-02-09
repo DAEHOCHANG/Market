@@ -15,6 +15,7 @@ import Foundation
 var curDate:String = ""
 var marketData: Dictionary<String, DataOfDate> = [:]
 var historyData: Array<History> = []
+var copyData:DataOfDate? = nil
 let numbering: [Int] = [1,2,3,4,5,6,7,8,9,10]
 var selectedRow = 0
 
