@@ -33,8 +33,7 @@ class customCell: FSCalendarCell, UIGestureRecognizerDelegate {
     }
     
     @objc func copyPaste(_ gesture: UILongPressGestureRecognizer) {
-        var copy = UIAlertController(title: "복사", message: "복사하시겠습니까?", preferredStyle: UIAlertController.Style.alert)
-        var paste = UIAlertController(title: "붙여넣기", message: "붙여넣기 하시겠습니까?", preferredStyle: UIAlertController.Style.alert)
+
     }
 
 }

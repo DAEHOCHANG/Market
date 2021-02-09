@@ -13,7 +13,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate  {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var selectedDate: UILabel!
     @IBOutlet weak var stackView: UIStackView!
-    
+    var copiedData:DataOfDate? = nil
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -47,8 +47,38 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate  {
     }
 
     @IBAction func dateCopy(_ sender: Any) {
+        guard let data = marketData[getDate()] else {
+            //경고
+            let warning = UIAlertController(title: "에러", message: "복사할 데이터가 없습니다.", preferredStyle: .alert)
+            let onAction = UIAlertAction(title: "확인", style: .default, handler: nil)
+            warning.addAction(onAction)
+            present(warning, animated: true, completion: nil)
+            return
+        }
+        self.copiedData = data
     }
     @IBAction func datePaste(_ sender: Any) {
+        guard let data = self.copiedData else {
+            //경고
+            let warning = UIAlertController(title: "에러", message: "붙여넣을 데이터가 없습니다.", preferredStyle: .alert)
+            let onAction = UIAlertAction(title: "확인", style: .default, handler: nil)
+            warning.addAction(onAction)
+            present(warning, animated: true, completion: nil)
+            return
+        }
+        marketData[getDate()] = data
+        self.calendar.reloadData()
+        self.tableView.reloadData()
+        writeMarketData()
+        self.copiedData = nil
+        
+        let list = data.getList()
+        for tmp in list {
+            historyData.append(newElement: History(productName: tmp.name, count: 1))
+        }
+        writeHistoryData()
+        
+        
     }
     
 }
