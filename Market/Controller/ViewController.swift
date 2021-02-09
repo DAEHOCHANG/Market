@@ -32,8 +32,6 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate  {
         calendar.appearance.headerDateFormat = "YYYY년 M월"
         calendar.delegate = self
         calendar.dataSource = self
-        calendar.register(customCell.self, forCellReuseIdentifier: "customCell")
-
         //테이블 뷰 설정
         tableView.delegate = self
         tableView.dataSource = self
@@ -80,9 +78,11 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate  {
         
         
     }
-    
-}
+    @objc func longPress(_ sender: UILongPressGestureRecognizer) {
+        print("hi")
+    }
 
+}
 
 //callendar
 extension ViewController: FSCalendarDataSource, FSCalendarDelegate {
@@ -94,7 +94,6 @@ extension ViewController: FSCalendarDataSource, FSCalendarDelegate {
         selectedDate.text = "Date : \(getDate())"
         self.tableView.reloadData()
         self.calendar.appearance.todayColor = UIColor.clear
-        
         
         if Calendar.current.isDateInWeekend(Date()) {
             self.calendar.appearance.titleTodayColor = UIColor.red
@@ -122,6 +121,7 @@ extension ViewController: FSCalendarDataSource, FSCalendarDelegate {
         return 0
     }
     
+
     func calendar(_ calendar: FSCalendar, cellFor date: Date, at position: FSCalendarMonthPosition) -> FSCalendarCell {
 
         let cell = calendar.dequeueReusableCell(withIdentifier: "customCell", for: date, at: position) as! customCell
@@ -134,6 +134,7 @@ extension ViewController: FSCalendarDataSource, FSCalendarDelegate {
         return cell
     }
     
+
 }
 
 
