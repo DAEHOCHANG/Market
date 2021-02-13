@@ -30,6 +30,7 @@ class ShowHistoryViewController: UIViewController, UIGestureRecognizerDelegate, 
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        selectedRow = 0
         super.viewWillAppear(animated)
         self.historyList.reloadData()
         self.navigationController?.interactivePopGestureRecognizer?.delegate = self
@@ -72,6 +73,7 @@ extension ShowHistoryViewController: UITableViewDelegate, UITableViewDataSource{
         }
         
         let product = Product(name: historyData[cellNum].productName, quantity: UInt(numbering[selectedRow]), isBought: false)
+        print(product)
         historyData[cellNum].count += 1
         historyData.sort(by: {$0.count > $1.count})
         

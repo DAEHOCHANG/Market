@@ -122,17 +122,7 @@ extension ViewController: FSCalendarDataSource, FSCalendarDelegate {
     }
     
 
-    func calendar(_ calendar: FSCalendar, cellFor date: Date, at position: FSCalendarMonthPosition) -> FSCalendarCell {
-
-        let cell = calendar.dequeueReusableCell(withIdentifier: "customCell", for: date, at: position) as! customCell
-        
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "YYYY-MM-dd"
-        cell.date = dateFormatter.string(from: date)
-
-        
-        return cell
-    }
+  
     
 
 }
