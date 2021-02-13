@@ -92,6 +92,9 @@ extension DataOfDate {
         list.remove(at: at)
     }
     
+    mutating func modify(at: Int, product: Product) {
+        self.list[at] = product
+    }
     mutating func append(product: Product) {
         self.list.append(product)
     }

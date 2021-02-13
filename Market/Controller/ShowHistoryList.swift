@@ -81,6 +81,7 @@ extension ShowHistoryViewController: UITableViewDelegate, UITableViewDataSource{
         
         writeMarketData()
         writeHistoryData()
+        selectedRow = 0
         self.view.endEditing(true)
         self.presentingViewController?.dismiss(animated: true)
     }

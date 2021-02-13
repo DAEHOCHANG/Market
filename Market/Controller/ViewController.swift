@@ -39,6 +39,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate  {
 
     //다시 나타날 경우 캘린더, ㅌ테이블 뷰 reload해줘야 할 것
     override func viewWillAppear(_ animated: Bool) {
+        selectedRow = 0
         super.viewWillAppear(animated)
         self.tableView.reloadData()
         self.calendar.reloadData()
@@ -129,7 +130,7 @@ extension ViewController: FSCalendarDataSource, FSCalendarDelegate {
 
 
 //테이블 뷰
-extension ViewController: UITableViewDataSource, UITableViewDelegate {
+extension ViewController: UITableViewDataSource, UITableViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
     //테이블뷰에 몇개나 올라갈 것인강!
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if let cnt = marketData[getDate()]?.count {
@@ -199,13 +200,76 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
             writeMarketData()
             success(true)
         })
+        let changeQuantity = UIContextualAction(style: .normal, title:  "수량변경", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
+            self.navigationController?.toolbar.isHidden = true
+            let picker = UIPickerView()
+            picker.delegate = self
+            picker.frame = CGRect(x: 0, y: self.view.fs_bottom-225, width: UIScreen.main.bounds.width, height: 225)
+            
+            picker.backgroundColor = .systemGray4
+            
+            let exitButton = UIBarButtonItem()
+            exitButton.title = "선택"
+            exitButton.target = self
+            exitButton.action = #selector(self.pickerExit(sender:))
+            exitButton.tag = indexPath.row
+            //exitButton.tintColor = .darkGray
+            
+            
+            let toolbar = UIToolbar()
+            toolbar.tintColor = .systemBlue
+            //UIScreen 은 뭐하는놈이길래,....
+            toolbar.frame = CGRect(x: 0, y: picker.fs_top-35, width: UIScreen.main.bounds.width, height: 35)
+            let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+            toolbar.setItems([flexSpace,exitButton], animated: false)
+            
+            self.view.addSubview(toolbar)
+            self.view.addSubview(picker)
+            success(true)
+        })
+        changeQuantity.backgroundColor = .systemBlue
+        
         let check = marketData[getDate()]?.getList()[indexPath.row]
         if check?.isBought == false {
-            return UISwipeActionsConfiguration(actions:[deleteAction,modifyAction1])
+            return UISwipeActionsConfiguration(actions:[deleteAction,modifyAction1,changeQuantity])
         } else {
-            return UISwipeActionsConfiguration(actions:[deleteAction,modifyAction2])
+            return UISwipeActionsConfiguration(actions:[deleteAction,modifyAction2,changeQuantity])
         }
     }
-    
 
+    @objc func pickerExit(sender: UIButton) {
+        for tmp in self.view.subviews {
+            let s = String(describing: type(of:tmp))
+            if s ==  "UIToolbar"  || s ==  "UIPickerView" {
+                tmp.removeFromSuperview()
+            }
+        }
+        self.navigationController?.toolbar.isHidden = false
+        let cellRow = sender.tag
+        guard var unit = marketData[getDate()]?.getList()[cellRow] else {
+            selectedRow = 0
+            return
+        }
+        unit.quantity = UInt(numbering[selectedRow])
+        marketData[getDate()]?.modify(at: cellRow, product: unit)
+        self.tableView.reloadData()
+        writeMarketData()
+        selectedRow = 0
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return numbering.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return String(numbering[row])
+    }
+
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        selectedRow = row
+    }
 }
