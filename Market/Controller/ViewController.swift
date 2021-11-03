@@ -11,8 +11,8 @@ import FSCalendar
 class ViewController: UIViewController, UIGestureRecognizerDelegate  {
     @IBOutlet weak var calendar: FSCalendar!
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var selectedDate: UILabel!
-    @IBOutlet weak var stackView: UIStackView!
+    
+   
     var copiedData:DataOfDate? = nil
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,7 +25,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate  {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "YYYY-MM-dd"
         setDate(date: dateFormatter.string(from: calendar.today!))
-        selectedDate.text = "Date : \(getDate())"
+        
         
         //캘린더 설정
         calendar.locale = Locale(identifier: "ko_KR")
@@ -92,7 +92,7 @@ extension ViewController: FSCalendarDataSource, FSCalendarDelegate {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "YYYY-MM-dd"
         setDate(date: dateFormatter.string(from: date))
-        selectedDate.text = "Date : \(getDate())"
+
         self.tableView.reloadData()
         self.calendar.appearance.todayColor = UIColor.clear
         
@@ -108,7 +108,6 @@ extension ViewController: FSCalendarDataSource, FSCalendarDelegate {
     public func calendar(_ calendar: FSCalendar, didDeselect date: Date, at monthPosition: FSCalendarMonthPosition) {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "YYYY-MM-dd"
-        selectedDate.text = "Date"
         setDate(date: "")
     }
 
