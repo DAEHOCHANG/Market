@@ -142,7 +142,7 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate, UIPickerVi
     //각 셀에 무엇이 올라갈 것인가
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "tableview_cell") else {
-            fatalError("error")
+            return UITableViewCell();
         }
         guard let list = marketData[getDate()]?.getList() else {
             return cell

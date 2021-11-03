@@ -109,6 +109,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		393D1CD02732D5E20063000B /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				393F0E6B25B060400025BD86 /* JsonFile.swift */,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
 		3992998F25B0364400870CFE = {
 			isa = PBXGroup;
 			children = (
@@ -134,8 +142,9 @@
 		3992999A25B0364400870CFE /* Market */ = {
 			isa = PBXGroup;
 			children = (
-				399E873D25B416A400D933FB /* Controller */,
-				399E873C25B416A000D933FB /* View */,
+				393D1CD02732D5E20063000B /* Features */,
+				399E873D25B416A400D933FB /* ViewController */,
+				399E873C25B416A000D933FB /* StoryBoards */,
 				399E873B25B4169700D933FB /* Model */,
 				3992999B25B0364400870CFE /* AppDelegate.swift */,
 				3992999D25B0364400870CFE /* SceneDelegate.swift */,
@@ -166,29 +175,28 @@
 		399E873B25B4169700D933FB /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				393F0E6B25B060400025BD86 /* JsonFile.swift */,
 				399E874425B417A200D933FB /* Data.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
 		};
-		399E873C25B416A000D933FB /* View */ = {
+		399E873C25B416A000D933FB /* StoryBoards */ = {
 			isa = PBXGroup;
 			children = (
 				399299A125B0364400870CFE /* Main.storyboard */,
 				399299A625B0364400870CFE /* LaunchScreen.storyboard */,
 			);
-			path = View;
+			path = StoryBoards;
 			sourceTree = "<group>";
 		};
-		399E873D25B416A400D933FB /* Controller */ = {
+		399E873D25B416A400D933FB /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
 				3992999F25B0364400870CFE /* ViewController.swift */,
 				39D81C2425B1BE5F00066D14 /* AddProduct.swift */,
 				39D81C1F25B1AE8000066D14 /* ShowHistoryList.swift */,
 			);
-			path = Controller;
+			path = ViewController;
 			sourceTree = "<group>";
 		};
 		76638321CF750CD5B9A904D4 /* Pods */ = {
