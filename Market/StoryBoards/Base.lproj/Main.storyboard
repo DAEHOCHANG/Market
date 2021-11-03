@@ -12,7 +12,7 @@
         <!--Market-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController storyboardIdentifier="ViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BYZ-38-t0r" customClass="ViewController" customModule="Market" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BYZ-38-t0r" customClass="MainViewController" customModule="Market" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -117,7 +117,7 @@
         <!--기록-->
         <scene sceneID="gGw-HO-WrQ">
             <objects>
-                <viewController id="9ST-1i-x6g" customClass="ShowHistoryViewController" customModule="Market" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="9ST-1i-x6g" customClass="HistoryViewController" customModule="Market" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Roa-Bb-dzq">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -169,10 +169,10 @@
             </objects>
             <point key="canvasLocation" x="1868" y="-934.18290854572717"/>
         </scene>
-        <!--Add Product-->
+        <!--Product Appending View Controller-->
         <scene sceneID="Qa0-U6-AJn">
             <objects>
-                <viewController storyboardIdentifier="AddStarList" useStoryboardIdentifierAsRestorationIdentifier="YES" id="wd1-Yz-Vgk" customClass="AddProduct" customModule="Market" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AddStarList" useStoryboardIdentifierAsRestorationIdentifier="YES" id="wd1-Yz-Vgk" customClass="ProductAppendingViewController" customModule="Market" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" restorationIdentifier="AddStar" id="AFO-J2-IKa">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

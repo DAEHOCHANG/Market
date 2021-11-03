@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class AddProduct: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
+class ProductAppendingViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
 
     @IBOutlet weak var number: UITextField!
     @IBOutlet weak var name: UITextField!

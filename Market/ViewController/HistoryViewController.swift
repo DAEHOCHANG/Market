@@ -9,65 +9,31 @@ import Foundation
 import UIKit
 
 //checkout test!
-class ShowHistoryViewController: UIViewController, UIGestureRecognizerDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
-   
-    
+class HistoryViewController: UIViewController, UIGestureRecognizerDelegate {
     @IBOutlet weak var historyList: UITableView!
+    
     var cellNum = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.navigationBar.isHidden = false
         historyList.delegate = self
         historyList.dataSource = self
     }
-
-    @IBAction func swipeBack(_ sender: UIScreenEdgePanGestureRecognizer) {
-        self.modalTransitionStyle = .crossDissolve
-        self.presentingViewController?.dismiss(animated: true)
-    }
-    @IBAction func BackButtoin(_ sender: UIButton) {
-        self.presentingViewController?.dismiss(animated: true)
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
-        selectedRow = 0
         super.viewWillAppear(animated)
-        self.historyList.reloadData()
+        selectedRow = 0
+        self.navigationController?.navigationBar.isHidden = false
         self.navigationController?.interactivePopGestureRecognizer?.delegate = self
+        self.historyList.reloadData()
     }
-    
-
+    //나중에 바로 닫히는것이아닌 카톡방처럼 움직이는 방식으로 바꿀 것
+    @IBAction func swipeBack(_ sender: UIScreenEdgePanGestureRecognizer) {
+        self.navigationController?.popViewController(animated: true)
+    }
 }
 
-extension ShowHistoryViewController: UITableViewDelegate, UITableViewDataSource{
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return historyData.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "historyCell") else {
-            fatalError("error!")
-        }
-        cell.textLabel?.text = historyData[indexPath.row].toString()
-        return cell
-    }
-    
-    
-    //드래그해서 삭제하는 경우임
-    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let deleteAction = UIContextualAction(style: .destructive, title:  "삭제", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
-            
-            historyData.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .fade)
-            writeHistoryData()
-            success(true)
-        })
-        return UISwipeActionsConfiguration(actions:[deleteAction])
-    }
-    
+extension HistoryViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     @objc func pickerExit() {
-
-        
         if marketData[getDate()] == nil {
             marketData[getDate()] = DataOfDate(date: getDate())
         }
@@ -101,6 +67,35 @@ extension ShowHistoryViewController: UITableViewDelegate, UITableViewDataSource{
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         selectedRow = row
     }
+}
+
+extension HistoryViewController: UITableViewDelegate, UITableViewDataSource{
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return historyData.count
+        //return historyData.
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "historyCell") else {
+            return UITableViewCell()
+        }
+        cell.textLabel?.text = historyData[indexPath.row].toString()
+        return cell
+    }
+    
+    
+    //드래그해서 삭제하는 경우임
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let deleteAction = UIContextualAction(style: .destructive, title:  "삭제", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
+            historyData.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+            writeHistoryData()
+            success(true)
+        })
+        return UISwipeActionsConfiguration(actions:[deleteAction])
+    }
+    
+    
     
     
     //history에서 클릭해서 추가할 경우
@@ -121,14 +116,12 @@ extension ShowHistoryViewController: UITableViewDelegate, UITableViewDataSource{
         
         let toolbar = UIToolbar()
         toolbar.tintColor = .systemBlue
-        //UIScreen 은 뭐하는놈이길래,....
         toolbar.frame = CGRect(x: 0, y: picker.fs_top-35, width: UIScreen.main.bounds.width, height: 35)
         let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         toolbar.setItems([flexSpace,exitButton], animated: false)
         
         self.view.addSubview(toolbar)
         self.view.addSubview(picker)
-       // self.presentingViewController?.dismiss(animated: true)
     }
 
 }
