@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		393D1CD22732DD0C0063000B /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 393D1CD12732DD0B0063000B /* Product.swift */; };
+		393D1CD42732E1220063000B /* History.swift in Sources */ = {isa = PBXBuildFile; fileRef = 393D1CD32732E1220063000B /* History.swift */; };
+		393D1CD62732E66B0063000B /* MarketCalendarModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 393D1CD52732E66B0063000B /* MarketCalendarModel.swift */; };
 		393F0E6C25B060400025BD86 /* JsonFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 393F0E6B25B060400025BD86 /* JsonFile.swift */; };
 		3992999C25B0364400870CFE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3992999B25B0364400870CFE /* AppDelegate.swift */; };
 		3992999E25B0364400870CFE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3992999D25B0364400870CFE /* SceneDelegate.swift */; };
@@ -43,6 +46,9 @@
 
 /* Begin PBXFileReference section */
 		0D8AC944139567EF199E3817 /* Pods_MarketTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MarketTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		393D1CD12732DD0B0063000B /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
+		393D1CD32732E1220063000B /* History.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = History.swift; sourceTree = "<group>"; };
+		393D1CD52732E66B0063000B /* MarketCalendarModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketCalendarModel.swift; sourceTree = "<group>"; };
 		393F0E6B25B060400025BD86 /* JsonFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonFile.swift; sourceTree = "<group>"; };
 		3992999825B0364400870CFE /* Market.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Market.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3992999B25B0364400870CFE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -176,6 +182,9 @@
 			isa = PBXGroup;
 			children = (
 				399E874425B417A200D933FB /* Data.swift */,
+				393D1CD12732DD0B0063000B /* Product.swift */,
+				393D1CD32732E1220063000B /* History.swift */,
+				393D1CD52732E66B0063000B /* MarketCalendarModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -450,11 +459,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				393D1CD42732E1220063000B /* History.swift in Sources */,
 				39D81C2025B1AE8000066D14 /* HistoryViewController.swift in Sources */,
+				393D1CD22732DD0C0063000B /* Product.swift in Sources */,
 				399299A025B0364400870CFE /* MainViewController.swift in Sources */,
 				399E874525B417A200D933FB /* Data.swift in Sources */,
 				3992999C25B0364400870CFE /* AppDelegate.swift in Sources */,
 				39D81C2525B1BE5F00066D14 /* ProductAppendingViewController.swift in Sources */,
+				393D1CD62732E66B0063000B /* MarketCalendarModel.swift in Sources */,
 				3992999E25B0364400870CFE /* SceneDelegate.swift in Sources */,
 				393F0E6C25B060400025BD86 /* JsonFile.swift in Sources */,
 			);
