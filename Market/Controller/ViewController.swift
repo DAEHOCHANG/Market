@@ -43,6 +43,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate  {
         super.viewWillAppear(animated)
         self.tableView.reloadData()
         self.calendar.reloadData()
+        self.navigationController?.navigationBar.isHidden = true
     }
 
     @IBAction func dateCopy(_ sender: Any) {
@@ -272,3 +273,4 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate, UIPickerVi
         selectedRow = row
     }
 }
+

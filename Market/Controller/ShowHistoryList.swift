@@ -16,7 +16,7 @@ class ShowHistoryViewController: UIViewController, UIGestureRecognizerDelegate, 
     var cellNum = 0
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.navigationController?.navigationBar.isHidden = false
         historyList.delegate = self
         historyList.dataSource = self
     }

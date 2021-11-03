@@ -18,18 +18,18 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X0v-mn-mqB">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
+                                <rect key="frame" x="0.0" y="44" width="320" height="475"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Qi-PN-jxe" customClass="FSCalendar">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="234.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="212.5"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Bsp-Tq-6iU">
-                                        <rect key="frame" x="0.0" y="284.5" width="320" height="234.5"/>
+                                        <rect key="frame" x="0.0" y="262.5" width="320" height="212.5"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TRb-yY-GEy">
-                                        <rect key="frame" x="0.0" y="234.5" width="320" height="50"/>
+                                        <rect key="frame" x="0.0" y="212.5" width="320" height="50"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="22f-RU-sRt">
                                                 <rect key="frame" x="270" y="0.0" width="50" height="50"/>
@@ -44,7 +44,7 @@
                                                     </preferredSymbolConfiguration>
                                                 </state>
                                                 <connections>
-                                                    <segue destination="wd1-Yz-Vgk" kind="show" id="QRc-QN-Rgu"/>
+                                                    <segue destination="wd1-Yz-Vgk" kind="presentation" id="bRs-pY-AZb"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o3F-5C-hfD">
@@ -60,7 +60,7 @@
                                                     </preferredSymbolConfiguration>
                                                 </state>
                                                 <connections>
-                                                    <segue destination="9ST-1i-x6g" kind="show" id="JPI-HI-3xR"/>
+                                                    <segue destination="9ST-1i-x6g" kind="show" id="YYi-Qa-vYV"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -114,7 +114,7 @@
             </objects>
             <point key="canvasLocation" x="918.75" y="-651.76056338028172"/>
         </scene>
-        <!--Show History View Controller-->
+        <!--기록-->
         <scene sceneID="gGw-HO-WrQ">
             <objects>
                 <viewController id="9ST-1i-x6g" customClass="ShowHistoryViewController" customModule="Market" customModuleProvider="target" sceneMemberID="viewController">
@@ -123,7 +123,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="wY0-sq-4cE">
-                                <rect key="frame" x="0.0" y="44.5" width="320" height="474.5"/>
+                                <rect key="frame" x="0.0" y="44" width="320" height="475"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="historyCell" id="IHZ-8N-7ZB" userLabel="TableViewCell">
@@ -140,43 +140,21 @@
                                     <outlet property="delegate" destination="9ST-1i-x6g" id="8nD-2h-ZvS"/>
                                 </connections>
                             </tableView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="기록" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dUv-Js-Vvy">
-                                <rect key="frame" x="139" y="10" width="42" height="29"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vzd-nC-Ba3">
-                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="50" id="Aoc-9X-RvP"/>
-                                    <constraint firstAttribute="height" constant="50" id="uS0-Xr-h9p"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
-                                <state key="normal" image="arrowshape.turn.up.left.fill" catalog="system"/>
-                                <connections>
-                                    <action selector="BackButtoin:" destination="9ST-1i-x6g" eventType="touchUpInside" id="pQM-mL-5rf"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="no9-Mg-gUE"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="wY0-sq-4cE" firstAttribute="bottom" secondItem="no9-Mg-gUE" secondAttribute="bottom" id="4Eb-8A-Z8f"/>
-                            <constraint firstItem="dUv-Js-Vvy" firstAttribute="top" secondItem="no9-Mg-gUE" secondAttribute="top" constant="10" id="7dn-r7-7IT"/>
-                            <constraint firstItem="dUv-Js-Vvy" firstAttribute="centerX" secondItem="Roa-Bb-dzq" secondAttribute="centerX" id="ArI-Ol-wjA"/>
-                            <constraint firstItem="Vzd-nC-Ba3" firstAttribute="top" secondItem="no9-Mg-gUE" secondAttribute="top" id="MDG-eP-YN5"/>
-                            <constraint firstItem="Vzd-nC-Ba3" firstAttribute="leading" secondItem="no9-Mg-gUE" secondAttribute="leading" id="Vps-PZ-ZOC"/>
                             <constraint firstItem="wY0-sq-4cE" firstAttribute="leading" secondItem="no9-Mg-gUE" secondAttribute="leading" id="ah3-Pc-QeG"/>
+                            <constraint firstItem="wY0-sq-4cE" firstAttribute="top" secondItem="no9-Mg-gUE" secondAttribute="top" id="i6x-ep-x8A"/>
                             <constraint firstItem="wY0-sq-4cE" firstAttribute="trailing" secondItem="no9-Mg-gUE" secondAttribute="trailing" id="vq9-bn-kkE"/>
-                            <constraint firstItem="wY0-sq-4cE" firstAttribute="top" secondItem="dUv-Js-Vvy" secondAttribute="bottom" constant="5.3300000000000001" id="xmt-nT-fNE"/>
                         </constraints>
                         <connections>
                             <outletCollection property="gestureRecognizers" destination="lr6-yC-4lh" appends="YES" id="JMZ-E3-YRv"/>
                         </connections>
                     </view>
-                    <navigationItem key="navigationItem" id="RsM-tm-Wie"/>
+                    <navigationItem key="navigationItem" title="기록" id="RsM-tm-Wie"/>
                     <connections>
                         <outlet property="historyList" destination="wY0-sq-4cE" id="mgx-Jh-F8u"/>
                     </connections>
@@ -196,7 +174,7 @@
             <objects>
                 <viewController storyboardIdentifier="AddStarList" useStoryboardIdentifierAsRestorationIdentifier="YES" id="wd1-Yz-Vgk" customClass="AddProduct" customModule="Market" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" restorationIdentifier="AddStar" id="AFO-J2-IKa">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aDK-X3-6BR">
@@ -289,14 +267,15 @@
                     </connections>
                 </screenEdgePanGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1868" y="-292.80359820089956"/>
+            <point key="canvasLocation" x="1868" y="-209"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="gEX-Kf-YRQ">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="ZZz-CD-NhF" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ZZz-CD-NhF" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="0uB-Pt-4Q8">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
