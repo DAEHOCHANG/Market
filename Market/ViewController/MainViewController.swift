@@ -8,7 +8,7 @@
 import UIKit
 import FSCalendar
 
-class ViewController: UIViewController, UIGestureRecognizerDelegate  {
+class MainViewController: UIViewController, UIGestureRecognizerDelegate  {
     @IBOutlet weak var calendar: FSCalendar!
     @IBOutlet weak var tableView: UITableView!
     
@@ -87,7 +87,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate  {
 }
 
 //callendar
-extension ViewController: FSCalendarDataSource, FSCalendarDelegate {
+extension MainViewController: FSCalendarDataSource, FSCalendarDelegate {
     //날짜 선택시 메소드
     public func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
         let dateFormatter = DateFormatter()
@@ -130,7 +130,7 @@ extension ViewController: FSCalendarDataSource, FSCalendarDelegate {
 
 
 //테이블 뷰
-extension ViewController: UITableViewDataSource, UITableViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
+extension MainViewController: UITableViewDataSource, UITableViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
     //테이블뷰에 몇개나 올라갈 것인강!
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if let cnt = marketData[getDate()]?.count {

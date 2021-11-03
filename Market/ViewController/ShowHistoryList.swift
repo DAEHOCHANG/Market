@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 //checkout test!
-class ShowHistoryViewController: UIViewController, UIGestureRecognizerDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
+class HistoryViewController: UIViewController, UIGestureRecognizerDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
    
     
     @IBOutlet weak var historyList: UITableView!
@@ -39,7 +39,7 @@ class ShowHistoryViewController: UIViewController, UIGestureRecognizerDelegate, 
 
 }
 
-extension ShowHistoryViewController: UITableViewDelegate, UITableViewDataSource{
+extension HistoryViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return historyData.count
     }
