@@ -18,9 +18,12 @@ public class MarketCalendarsViewModel {
     }
     func deleteProduct(when day: Int, product: MarketProduct) {
         calendar.deleteProduct(when: day, product: product)
+        writeMarketCalendarModel(calendar: calendar)
     }
+    //같은 데이터 중복이 일어날 수 있으니 calendar내부적으로는 이를 해결 해 주어야함
     func appendProduct(when day: Int, product: MarketProduct) {
         calendar.appendProduct(when: day, product: product)
+        writeMarketCalendarModel(calendar: calendar)
     }
     func changeCalendar(year: String, month: String) {
         let newCalendar = MarketCalendarModel(year: year, month: month)
