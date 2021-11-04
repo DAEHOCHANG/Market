@@ -7,10 +7,13 @@
 
 import Foundation
 
-struct MarketCalendarModel: Codable{
+public struct MarketCalendarModel: Codable{
     //[date:[Product]] 같은 구조
-    private var yearMonth: YearMonth
-    private var productsOfDates: [Int:[MarketProduct]] = [:]
+    var yearMonth: YearMonth
+    var productsOfDates: [Int:[MarketProduct]] = [:]
+    init(year: String, month: String) {
+        self.yearMonth = YearMonth(year: year, month: month)
+    }
 }
 
 extension MarketCalendarModel {
@@ -26,7 +29,40 @@ extension MarketCalendarModel {
     }
 }
 
-struct YearMonth :Hashable,Codable {
+struct YearMonth: Hashable, Codable {
     var year: String
     var month: String
+}
+
+public func readMarketCalendarModel(calendar data: MarketCalendarModel) -> MarketCalendarModel {
+    let year = data.year
+    let month = data.month
+    do {
+        let fileManager = FileManager.default
+        let baseURL = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first!
+        let dirURL = baseURL.appendingPathComponent("MarketCalendar")
+        let fileURL = dirURL.appendingPathComponent("\(year)&\(month)")
+        let data = try String(contentsOf: fileURL, encoding: .utf8).data(using: .utf8)!
+        let ret = try JSONDecoder().decode(MarketCalendarModel.self, from: data)
+        return ret
+    } catch {
+        print(error)
+        return data
+    }
+}
+
+public func writeMarketCalendarModel(calendar data: MarketCalendarModel) {
+    let year = data.year
+    let month = data.month
+    do {
+        let fileManager = FileManager.default
+        let baseURL = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first!
+        let dirURL = baseURL.appendingPathComponent("MarketCalendar")
+        let fileURL = dirURL.appendingPathComponent("\(year)&\(month)")
+        let tmpData = try JSONEncoder().encode(data)
+        let str = String(data: tmpData, encoding: .utf8)!
+        try str.write(to: fileURL,atomically: false, encoding: .utf8)
+    } catch {
+        print(error)
+    }
 }

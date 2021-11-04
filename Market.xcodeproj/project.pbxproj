@@ -148,6 +148,7 @@
 		3992999A25B0364400870CFE /* Market */ = {
 			isa = PBXGroup;
 			children = (
+				39E119CB2733C447006F6479 /* ViewModel */,
 				393D1CD02732D5E20063000B /* Features */,
 				399E873D25B416A400D933FB /* ViewController */,
 				399E873C25B416A000D933FB /* StoryBoards */,
@@ -206,6 +207,13 @@
 				39D81C1F25B1AE8000066D14 /* HistoryViewController.swift */,
 			);
 			path = ViewController;
+			sourceTree = "<group>";
+		};
+		39E119CB2733C447006F6479 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		76638321CF750CD5B9A904D4 /* Pods */ = {
