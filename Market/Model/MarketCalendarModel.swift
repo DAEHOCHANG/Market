@@ -23,9 +23,17 @@ extension MarketCalendarModel {
     var month: String {
         return yearMonth.month
     }
-    subscript(date hash:Int) -> [MarketProduct] {
+    subscript(day hash:Int) -> [MarketProduct] {
         if productsOfDates[hash] == nil { return [] }
         else { return productsOfDates[hash]! }
+    }
+    mutating func deleteProduct(when day: Int, product: MarketProduct) {
+        if productsOfDates[day] == nil { return }
+        productsOfDates[day]! = productsOfDates[day]!.filter({$0==product})
+    }
+    mutating func appendProduct(when day: Int, product: MarketProduct) {
+        if productsOfDates[day] == nil { return }
+        productsOfDates[day]!.append(product)
     }
 }
 

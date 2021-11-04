@@ -11,11 +11,14 @@ import Foundation
 struct tmpHistory: Hashable, Codable {
     var product: tmpProduct
     var count: Int
-    var strat: Bool
+    var star: Bool
 }
 
 public struct MarketHistory: Codable {
     var histories: [tmpProduct:tmpHistory] = [:]
+    mutating func deleteProduct(product: tmpProduct) {
+        self.histories.removeValue(forKey: product)
+    }
 }
 
 public func readMarketHistory() -> MarketHistory {

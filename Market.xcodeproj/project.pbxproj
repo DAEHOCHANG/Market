@@ -22,6 +22,9 @@
 		399E874525B417A200D933FB /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 399E874425B417A200D933FB /* Data.swift */; };
 		39D81C2025B1AE8000066D14 /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39D81C1F25B1AE8000066D14 /* HistoryViewController.swift */; };
 		39D81C2525B1BE5F00066D14 /* ProductAppendingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39D81C2425B1BE5F00066D14 /* ProductAppendingViewController.swift */; };
+		39E119CD2733CB5E006F6479 /* MarketCalendarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39E119CC2733CB5E006F6479 /* MarketCalendarViewModel.swift */; };
+		39E119CF2733E0E6006F6479 /* HistoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39E119CE2733E0E6006F6479 /* HistoryViewModel.swift */; };
+		39E119D12733F447006F6479 /* ProductViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39E119D02733F447006F6479 /* ProductViewModel.swift */; };
 		8C11638D4ADF56775506C6A4 /* Pods_Market_MarketUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87EE9D63B771776534DBD838 /* Pods_Market_MarketUITests.framework */; };
 		D53CA6280DAE91F7EBBC7237 /* Pods_Market.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 747A7DF477C81508B53B8466 /* Pods_Market.framework */; };
 		F250242BA1F3C2EDD2D543E0 /* Pods_MarketTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D8AC944139567EF199E3817 /* Pods_MarketTests.framework */; };
@@ -67,6 +70,9 @@
 		399E874425B417A200D933FB /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		39D81C1F25B1AE8000066D14 /* HistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
 		39D81C2425B1BE5F00066D14 /* ProductAppendingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductAppendingViewController.swift; sourceTree = "<group>"; };
+		39E119CC2733CB5E006F6479 /* MarketCalendarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketCalendarViewModel.swift; sourceTree = "<group>"; };
+		39E119CE2733E0E6006F6479 /* HistoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewModel.swift; sourceTree = "<group>"; };
+		39E119D02733F447006F6479 /* ProductViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductViewModel.swift; sourceTree = "<group>"; };
 		45D32C20E78DED22E229035A /* Pods-MarketTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MarketTests.debug.xcconfig"; path = "Target Support Files/Pods-MarketTests/Pods-MarketTests.debug.xcconfig"; sourceTree = "<group>"; };
 		5FB8A35ED0E93823026F39F7 /* Pods-Market.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Market.debug.xcconfig"; path = "Target Support Files/Pods-Market/Pods-Market.debug.xcconfig"; sourceTree = "<group>"; };
 		68827BAA23D7A87E7865ED00 /* Pods-Market.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Market.release.xcconfig"; path = "Target Support Files/Pods-Market/Pods-Market.release.xcconfig"; sourceTree = "<group>"; };
@@ -212,6 +218,9 @@
 		39E119CB2733C447006F6479 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				39E119CC2733CB5E006F6479 /* MarketCalendarViewModel.swift */,
+				39E119CE2733E0E6006F6479 /* HistoryViewModel.swift */,
+				39E119D02733F447006F6479 /* ProductViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -472,9 +481,12 @@
 				393D1CD22732DD0C0063000B /* Product.swift in Sources */,
 				399299A025B0364400870CFE /* MainViewController.swift in Sources */,
 				399E874525B417A200D933FB /* Data.swift in Sources */,
+				39E119D12733F447006F6479 /* ProductViewModel.swift in Sources */,
 				3992999C25B0364400870CFE /* AppDelegate.swift in Sources */,
 				39D81C2525B1BE5F00066D14 /* ProductAppendingViewController.swift in Sources */,
+				39E119CF2733E0E6006F6479 /* HistoryViewModel.swift in Sources */,
 				393D1CD62732E66B0063000B /* MarketCalendarModel.swift in Sources */,
+				39E119CD2733CB5E006F6479 /* MarketCalendarViewModel.swift in Sources */,
 				3992999E25B0364400870CFE /* SceneDelegate.swift in Sources */,
 				393F0E6C25B060400025BD86 /* JsonFile.swift in Sources */,
 			);
