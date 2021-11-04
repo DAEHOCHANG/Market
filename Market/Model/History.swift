@@ -8,11 +8,13 @@
 import Foundation
 
 
-struct tmpHistory:Hashable {
+struct tmpHistory: Hashable, Codable {
     var product: tmpProduct
     var count: Int
+    var strat: Bool
 }
 
-struct MarketHistory {
+struct MarketHistory: Codable {
     var histories: [tmpProduct:tmpHistory] = [:]
 }
+

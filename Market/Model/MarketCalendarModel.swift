@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct MarketCalendarModel {
+struct MarketCalendarModel: Codable{
     //[date:[Product]] 같은 구조
     private var yearMonth: YearMonth
     private var productsOfDates: [Int:[MarketProduct]] = [:]
@@ -26,7 +26,7 @@ extension MarketCalendarModel {
     }
 }
 
-struct YearMonth :Hashable {
+struct YearMonth :Hashable,Codable {
     var year: String
     var month: String
 }
