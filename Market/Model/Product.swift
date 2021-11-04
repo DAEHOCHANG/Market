@@ -7,12 +7,15 @@
 
 import Foundation
 
-struct MarketProduct {
+struct MarketProduct: Codable {
     var product: tmpProduct
     var productQuantity: Int
 }
+extension MarketProduct: Equatable {
+    
+}
 
-struct tmpProduct{
+struct tmpProduct: Codable{
     var productName: String
 }
 
