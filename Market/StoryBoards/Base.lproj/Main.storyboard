@@ -49,7 +49,7 @@
                                                     </preferredSymbolConfiguration>
                                                 </state>
                                                 <connections>
-                                                    <segue destination="wd1-Yz-Vgk" kind="presentation" id="bRs-pY-AZb"/>
+                                                    <segue destination="wd1-Yz-Vgk" kind="presentation" destinationCreationSelector="addProductSegueAction:" id="bRs-pY-AZb"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o3F-5C-hfD">
@@ -65,7 +65,7 @@
                                                     </preferredSymbolConfiguration>
                                                 </state>
                                                 <connections>
-                                                    <segue destination="9ST-1i-x6g" kind="show" id="YYi-Qa-vYV"/>
+                                                    <segue destination="9ST-1i-x6g" kind="show" destinationCreationSelector="historySegueAction:" id="YYi-Qa-vYV"/>
                                                 </connections>
                                             </button>
                                         </subviews>

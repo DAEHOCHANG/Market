@@ -36,7 +36,13 @@ class MainViewController: UIViewController, UIGestureRecognizerDelegate  {
         self.calendar.reloadData()
         self.navigationController?.navigationBar.isHidden = true
     }
-/*
+    @IBSegueAction func historySegueAction(_ coder: NSCoder) -> HistoryViewController? {
+        return HistoryViewController(coder: coder)
+    }
+    @IBSegueAction func addProductSegueAction(_ coder: NSCoder) -> ProductAppendingViewController? {
+        return ProductAppendingViewController(coder: coder)
+    }
+    /*
     @IBAction func dateCopy(_ sender: Any) {
         guard let data = marketData[getDate()] else {
             //경고
