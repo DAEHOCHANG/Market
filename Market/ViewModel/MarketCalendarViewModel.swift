@@ -12,16 +12,18 @@ public class MarketCalendarsViewModel {
     subscript(_ hash:Int)  -> [MarketProduct]{
         return calendar[day: hash]
     }
-    
     init(year:String, month:String) {
         calendar = MarketCalendarModel(year: year, month: month)
         calendar = readMarketCalendarModel(calendar: calendar)
     }
-    
     func deleteProduct(when day: Int, product: MarketProduct) {
         calendar.deleteProduct(when: day, product: product)
     }
     func appendProduct(when day: Int, product: MarketProduct) {
         calendar.appendProduct(when: day, product: product)
+    }
+    func changeCalendar(year: String, month: String) {
+        let newCalendar = MarketCalendarModel(year: year, month: month)
+        calendar = readMarketCalendarModel(calendar: newCalendar)
     }
 }
