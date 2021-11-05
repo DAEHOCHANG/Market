@@ -166,7 +166,6 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
         let deleteAction = UIContextualAction(style: .destructive, title:  "삭제", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
             let day = self.selectedDay()
             let deletProduct = self.calendarViewModel[day][indexPath.row]
-            print(deletProduct)
             self.calendarViewModel.deleteProduct(when: day, product: deletProduct)
             tableView.deleteRows(at: [indexPath], with: .fade)
             
