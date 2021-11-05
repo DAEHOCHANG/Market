@@ -19,4 +19,8 @@ public class HistoryViewModel {
         history.deleteProduct(product: product)
         writeMarketHistory(history: history)
     }
+    func appendProduct(product: tmpProduct) {
+        history.appendProduct(product: product)
+        writeMarketHistory(history: history)
+    }
 }
