@@ -13,7 +13,9 @@ struct MarketProduct: Codable {
     var unit: String = ""
 }
 extension MarketProduct: Equatable {
-    
+    static func == (lhs: MarketProduct, rhs: MarketProduct) -> Bool {
+        return lhs.product == rhs.product && lhs.unit == rhs.unit
+    }
 }
 
 struct tmpProduct: Codable{
