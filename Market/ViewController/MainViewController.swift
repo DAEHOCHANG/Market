@@ -23,6 +23,7 @@ class MainViewController: UIViewController, UIGestureRecognizerDelegate  {
         calendar.delegate = self
         calendar.dataSource = self
         calendar.appearance.titleTodayColor = .blue
+        calendar.select(Date())
         
         //테이블 뷰 설정
         tableView.delegate = self
@@ -45,6 +46,7 @@ class MainViewController: UIViewController, UIGestureRecognizerDelegate  {
         let component = Calendar.current.dateComponents([.day], from: calendar.selectedDate!)
         nvc?.appendingDay = component.day
         nvc?.calendarViewModel = self.calendarViewModel
+        nvc?.historyViewModel = self.histroyViewModel
         return nvc
     }
     /*
@@ -104,8 +106,9 @@ extension MainViewController: FSCalendarDataSource, FSCalendarDelegate {
     
     //이벤트 띄우는 메서드
     func calendar(_ calendar: FSCalendar, numberOfEventsFor date: Date) -> Int {
-        let component = Calendar.current.dateComponents([.day], from: date)
-        if calendarViewModel[component.day!].isEmpty {
+        let component = Calendar.current.dateComponents([.month,.day], from: date)
+        let currentMonth = Calendar.current.dateComponents([.month], from: calendar.currentPage+100000).month!
+        if currentMonth != component.month || calendarViewModel[component.day!].isEmpty {
             return 0
         } else {
             return 1
@@ -117,6 +120,7 @@ extension MainViewController: FSCalendarDataSource, FSCalendarDelegate {
         let date = calendar.currentPage + 100000
         let compoents = Calendar.current.dateComponents([.year,.month],from: date)
         self.calendarViewModel.changeCalendar(year: String(compoents.year!), month: String(compoents.month!))
+        self.calendar.reloadData()
     }
 }
 
@@ -126,23 +130,23 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
     //테이블뷰에 몇개나 올라갈 것인강!
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let date = self.calendar.selectedDate else {return 0}
-        let components = Calendar.current.dateComponents([.year,.month],from: date)
+        let components = Calendar.current.dateComponents([.year,.month,.day],from: date)
         guard let day = components.day else {return 0}
         return calendarViewModel[day].count
     }
     
     //각 셀에 무엇이 올라갈 것인가
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "tableview_cell") else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "productTableViewCell") else {
             return UITableViewCell();
         }
         guard let date = self.calendar.selectedDate else {return cell}
-        let components = Calendar.current.dateComponents([.year,.month],from: date)
+        let components = Calendar.current.dateComponents([.year,.month,.day],from: date)
         guard let day = components.day else {return cell}
         let name = calendarViewModel[day][indexPath.row].product.productName
         let quant = calendarViewModel[day][indexPath.row].productQuantity
-        
-        cell.textLabel?.text = "\(name) \(quant)"
+        let unit = calendarViewModel[day][indexPath.row].unit
+        cell.textLabel?.text = "\(name) \(quant)\(unit)"
         cell.textLabel?.textColor = .black
         return cell
     }

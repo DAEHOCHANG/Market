@@ -14,6 +14,7 @@ class ProductAppendingViewController: UIViewController {
     @IBOutlet weak var name: UITextField!
     @IBOutlet var addView: UIView!
     weak var calendarViewModel: MarketCalendarsViewModel?
+    weak var historyViewModel: HistoryViewModel?
     var appendingDay: Int?
     
     override func viewDidLoad() {
@@ -30,15 +31,19 @@ class ProductAppendingViewController: UIViewController {
     }
     
     @IBAction func plusButton(_ sender: UIButton) {
-        defer {
-            self.presentingViewController?.dismiss(animated: true)
-        }
+        defer { self.presentingViewController?.dismiss(animated: true) }
+        
         guard let day = appendingDay, let viewModel = calendarViewModel else { return }
         guard let name = name.text, let quantStr = number.text else { return }
-        guard let quantity = Int(quantStr.components(separatedBy: CharacterSet.letters).joined()) else {return}
-        let unit = quantStr.components(separatedBy: CharacterSet.decimalDigits).joined()
+        
+        let quantityS = quantStr.components(separatedBy: CharacterSet.letters).joined().trimmingCharacters(in: .whitespaces)
+        let unit = quantStr.components(separatedBy: CharacterSet.decimalDigits).joined().trimmingCharacters(in: .whitespaces)
+        
+        guard let quantity = Int(quantityS) else { return }
+        
         let product = MarketProduct(product: tmpProduct(productName: name), productQuantity: quantity,unit: unit)
         viewModel.appendProduct(when: day, product: product)
+        
     }
     
     //number뷰를 클리갛면 피커뷰 나오게
