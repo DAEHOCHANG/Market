@@ -29,11 +29,18 @@ extension MarketCalendarModel {
     }
     mutating func deleteProduct(when day: Int, product: MarketProduct) {
         if productsOfDates[day] == nil { return }
-        productsOfDates[day]! = productsOfDates[day]!.filter({$0==product})
+        productsOfDates[day]! = productsOfDates[day]!.filter({$0 != product})
     }
     mutating func appendProduct(when day: Int, product: MarketProduct) {
         if productsOfDates[day] == nil {
             productsOfDates[day] = []
+        }
+        
+        for (idx,productVal) in productsOfDates[day]!.enumerated() {
+            if productVal == product {
+                productsOfDates[day]![idx].productQuantity += product.productQuantity
+                return
+            }
         }
         productsOfDates[day]!.append(product)
     }
