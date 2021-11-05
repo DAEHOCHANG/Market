@@ -32,7 +32,9 @@ extension MarketCalendarModel {
         productsOfDates[day]! = productsOfDates[day]!.filter({$0==product})
     }
     mutating func appendProduct(when day: Int, product: MarketProduct) {
-        if productsOfDates[day] == nil { return }
+        if productsOfDates[day] == nil {
+            productsOfDates[day] = []
+        }
         productsOfDates[day]!.append(product)
     }
 }
@@ -54,7 +56,7 @@ public func readMarketCalendarModel(calendar data: MarketCalendarModel) -> Marke
         let ret = try JSONDecoder().decode(MarketCalendarModel.self, from: data)
         return ret
     } catch {
-        print(error)
+        print("read Market Error \(error)")
         return data
     }
 }
@@ -66,11 +68,14 @@ public func writeMarketCalendarModel(calendar data: MarketCalendarModel) {
         let fileManager = FileManager.default
         let baseURL = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first!
         let dirURL = baseURL.appendingPathComponent("MarketCalendar")
-        let fileURL = dirURL.appendingPathComponent("\(year)&\(month)")
+        if fileManager.fileExists(atPath: dirURL.path) == false {
+            try fileManager.createDirectory(at: dirURL, withIntermediateDirectories: false, attributes: nil)
+        }
+        let fileURL = dirURL.appendingPathComponent("\(year)&\(month)",isDirectory: false)
         let tmpData = try JSONEncoder().encode(data)
         let str = String(data: tmpData, encoding: .utf8)!
-        try str.write(to: fileURL,atomically: false, encoding: .utf8)
+        try str.write(to: fileURL, atomically: true, encoding: .utf8)
     } catch {
-        print(error)
+        print("write Market Error \(error)")
     }
 }

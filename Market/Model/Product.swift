@@ -10,6 +10,7 @@ import Foundation
 struct MarketProduct: Codable {
     var product: tmpProduct
     var productQuantity: Int
+    var unit: String = ""
 }
 extension MarketProduct: Equatable {
     

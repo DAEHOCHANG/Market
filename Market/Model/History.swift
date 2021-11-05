@@ -42,7 +42,7 @@ public func writeMarketHistory(history data: MarketHistory) {
         let fileURL = baseURL.appendingPathComponent("History")
         let tmpData = try JSONEncoder().encode(data)
         let str = String(data: tmpData, encoding: .utf8)!
-        try str.write(to: fileURL,atomically: false, encoding: .utf8)
+        try str.write(toFile: fileURL.path, atomically: true, encoding: .utf8)
     } catch {
         print(error)
     }

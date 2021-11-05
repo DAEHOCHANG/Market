@@ -11,7 +11,7 @@ import FSCalendar
 class MainViewController: UIViewController, UIGestureRecognizerDelegate  {
     @IBOutlet weak var calendar: FSCalendar!
     @IBOutlet weak var tableView: UITableView!
-    let calendarViewModel = MarketCalendarsViewModel(year: "00", month: "00")
+    let calendarViewModel = MarketCalendarsViewModel()
     let histroyViewModel = HistoryViewModel()
    
     var copiedData:DataOfDate? = nil
@@ -37,10 +37,15 @@ class MainViewController: UIViewController, UIGestureRecognizerDelegate  {
         self.navigationController?.navigationBar.isHidden = true
     }
     @IBSegueAction func historySegueAction(_ coder: NSCoder) -> HistoryViewController? {
+       
         return HistoryViewController(coder: coder)
     }
     @IBSegueAction func addProductSegueAction(_ coder: NSCoder) -> ProductAppendingViewController? {
-        return ProductAppendingViewController(coder: coder)
+        let nvc = ProductAppendingViewController(coder: coder)
+        let component = Calendar.current.dateComponents([.day], from: calendar.selectedDate!)
+        nvc?.appendingDay = component.day
+        nvc?.calendarViewModel = self.calendarViewModel
+        return nvc
     }
     /*
     @IBAction func dateCopy(_ sender: Any) {

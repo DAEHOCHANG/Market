@@ -253,9 +253,6 @@
                             <constraint firstItem="3SG-Ey-2kp" firstAttribute="leading" secondItem="fQq-gp-OLH" secondAttribute="leading" constant="10" id="wae-T1-fUa"/>
                             <constraint firstItem="alA-ez-Tnr" firstAttribute="top" secondItem="fQq-gp-OLH" secondAttribute="top" constant="10" id="wja-L9-Tpm"/>
                         </constraints>
-                        <connections>
-                            <outletCollection property="gestureRecognizers" destination="KoI-lU-1TE" appends="YES" id="az7-1v-Nby"/>
-                        </connections>
                     </view>
                     <navigationItem key="navigationItem" id="xpW-aC-sUw"/>
                     <connections>
@@ -265,12 +262,6 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yRA-fJ-6XK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <screenEdgePanGestureRecognizer minimumNumberOfTouches="1" id="KoI-lU-1TE">
-                    <rectEdge key="edges" left="YES"/>
-                    <connections>
-                        <action selector="swipeBack:" destination="wd1-Yz-Vgk" id="inM-tU-ShX"/>
-                    </connections>
-                </screenEdgePanGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1868" y="-209"/>
         </scene>
