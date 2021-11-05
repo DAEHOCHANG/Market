@@ -19,6 +19,14 @@ public struct MarketHistory: Codable {
     mutating func deleteProduct(product: tmpProduct) {
         self.histories.removeValue(forKey: product)
     }
+    mutating func appendProduct(product: tmpProduct) {
+        if histories[product] == nil {
+            let history = tmpHistory(product: product, count: 1, star: false)
+            histories[product] = history
+        } else {
+            histories[product]?.count += 1
+        }
+    }
 }
 
 public func readMarketHistory() -> MarketHistory {
