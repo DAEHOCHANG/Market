@@ -11,6 +11,7 @@ import FSCalendar
 class MainViewController: UIViewController, UIGestureRecognizerDelegate  {
     @IBOutlet weak var calendar: FSCalendar!
     @IBOutlet weak var tableView: UITableView!
+    
     let calendarViewModel = MarketCalendarsViewModel()
     let histroyViewModel = HistoryViewModel()
    
@@ -24,12 +25,16 @@ class MainViewController: UIViewController, UIGestureRecognizerDelegate  {
         calendar.dataSource = self
         calendar.appearance.titleTodayColor = .blue
         calendar.select(Date())
-        
         //테이블 뷰 설정
         tableView.delegate = self
         tableView.dataSource = self
     }
-
+    
+    func selectedDay() -> Int {
+        let component = Calendar.current.dateComponents([.day], from: calendar.selectedDate!)
+        return component.day!
+    }
+    
     //다시 나타날 경우 캘린더, ㅌ테이블 뷰 reload해줘야 할 것
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -37,15 +42,16 @@ class MainViewController: UIViewController, UIGestureRecognizerDelegate  {
         self.calendar.reloadData()
         self.navigationController?.navigationBar.isHidden = true
     }
+    
     @IBSegueAction func historySegueAction(_ coder: NSCoder) -> HistoryViewController? {
         let nvc = HistoryViewController(coder: coder)
         nvc?.historyViewModel = self.histroyViewModel
         return nvc
     }
+    
     @IBSegueAction func addProductSegueAction(_ coder: NSCoder) -> ProductAppendingViewController? {
         let nvc = ProductAppendingViewController(coder: coder)
-        let component = Calendar.current.dateComponents([.day], from: calendar.selectedDate!)
-        nvc?.appendingDay = component.day
+        nvc?.appendingDay = selectedDay()
         nvc?.calendarViewModel = self.calendarViewModel
         nvc?.historyViewModel = self.histroyViewModel
         return nvc
@@ -153,27 +159,24 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     //셀을 드래그 했을 때 액션
-    /*
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
         
         //삭제, 데이터에서 삭제해 줘야함
         let deleteAction = UIContextualAction(style: .destructive, title:  "삭제", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
-            marketData[getDate()]?.removeProduct(at: indexPath.row)
+            let day = self.selectedDay()
+            let deletProduct = self.calendarViewModel[day][indexPath.row]
+            print(deletProduct)
+            self.calendarViewModel.deleteProduct(when: day, product: deletProduct)
             tableView.deleteRows(at: [indexPath], with: .fade)
             
-            if marketData[getDate()]?.count == 0 {
-                marketData.removeValue(forKey: getDate())
-            }
-            
-            writeMarketData()
             self.calendar.reloadData()
             success(true)
         })
         
         //수정 버튼
         //=> 구매 완료로 변경
-        
+        /*
         let modifyAction1 = UIContextualAction(style: .normal, title:  "구매완료", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
             var toProduct = marketData[getDate()]?.getList()[indexPath.row]
             toProduct?.isBought = true
@@ -226,8 +229,9 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
             return UISwipeActionsConfiguration(actions:[deleteAction,modifyAction1,changeQuantity])
         } else {
             return UISwipeActionsConfiguration(actions:[deleteAction,modifyAction2,changeQuantity])
-        }
-    }*/
+        }*/
+        return UISwipeActionsConfiguration(actions:[deleteAction])
+    }
 
    
 }
