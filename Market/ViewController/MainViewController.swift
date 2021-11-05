@@ -38,8 +38,9 @@ class MainViewController: UIViewController, UIGestureRecognizerDelegate  {
         self.navigationController?.navigationBar.isHidden = true
     }
     @IBSegueAction func historySegueAction(_ coder: NSCoder) -> HistoryViewController? {
-       
-        return HistoryViewController(coder: coder)
+        let nvc = HistoryViewController(coder: coder)
+        nvc?.historyViewModel = self.histroyViewModel
+        return nvc
     }
     @IBSegueAction func addProductSegueAction(_ coder: NSCoder) -> ProductAppendingViewController? {
         let nvc = ProductAppendingViewController(coder: coder)

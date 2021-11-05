@@ -11,7 +11,7 @@ import UIKit
 //checkout test!
 class HistoryViewController: UIViewController, UIGestureRecognizerDelegate {
     @IBOutlet weak var historyList: UITableView!
-    
+    weak var historyViewModel:HistoryViewModel?
     var cellNum = 0
     
     override func viewDidLoad() {
@@ -71,20 +71,26 @@ extension HistoryViewController: UIPickerViewDelegate, UIPickerViewDataSource {
 
 extension HistoryViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return historyData.count
-        //return historyData.
+        guard let modelView = self.historyViewModel else {
+            return 0
+        }
+        return modelView.histories.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "historyCell") else {
             return UITableViewCell()
         }
-        cell.textLabel?.text = historyData[indexPath.row].toString()
+        guard let modelView = self.historyViewModel else {
+            return UITableViewCell()
+        }
+        cell.textLabel?.text = modelView.histories[indexPath.row].product.productName
         return cell
     }
     
     
     //드래그해서 삭제하는 경우임
+    /*
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let deleteAction = UIContextualAction(style: .destructive, title:  "삭제", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
             historyData.remove(at: indexPath.row)
@@ -93,12 +99,13 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource{
             success(true)
         })
         return UISwipeActionsConfiguration(actions:[deleteAction])
-    }
+    }*/
     
     
     
     
     //history에서 클릭해서 추가할 경우
+    /*
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         cellNum = indexPath.row
         let picker = UIPickerView()
@@ -122,6 +129,6 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource{
         
         self.view.addSubview(toolbar)
         self.view.addSubview(picker)
-    }
+    }*/
 
 }

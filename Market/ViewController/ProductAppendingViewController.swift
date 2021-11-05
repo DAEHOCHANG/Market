@@ -43,7 +43,7 @@ class ProductAppendingViewController: UIViewController {
         
         let product = MarketProduct(product: tmpProduct(productName: name), productQuantity: quantity,unit: unit)
         viewModel.appendProduct(when: day, product: product)
-        
+        historyViewModel?.appendProduct(product: product.product)
     }
     
     //number뷰를 클리갛면 피커뷰 나오게
