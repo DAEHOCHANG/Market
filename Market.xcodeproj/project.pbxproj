@@ -11,6 +11,7 @@
 		393D1CD42732E1220063000B /* History.swift in Sources */ = {isa = PBXBuildFile; fileRef = 393D1CD32732E1220063000B /* History.swift */; };
 		393D1CD62732E66B0063000B /* MarketCalendarModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 393D1CD52732E66B0063000B /* MarketCalendarModel.swift */; };
 		393F0E6C25B060400025BD86 /* JsonFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 393F0E6B25B060400025BD86 /* JsonFile.swift */; };
+		39700F942734150C00B9282E /* Observer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39700F932734150C00B9282E /* Observer.swift */; };
 		3992999C25B0364400870CFE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3992999B25B0364400870CFE /* AppDelegate.swift */; };
 		3992999E25B0364400870CFE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3992999D25B0364400870CFE /* SceneDelegate.swift */; };
 		399299A025B0364400870CFE /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3992999F25B0364400870CFE /* MainViewController.swift */; };
@@ -53,6 +54,7 @@
 		393D1CD32732E1220063000B /* History.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = History.swift; sourceTree = "<group>"; };
 		393D1CD52732E66B0063000B /* MarketCalendarModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketCalendarModel.swift; sourceTree = "<group>"; };
 		393F0E6B25B060400025BD86 /* JsonFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonFile.swift; sourceTree = "<group>"; };
+		39700F932734150C00B9282E /* Observer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observer.swift; sourceTree = "<group>"; };
 		3992999825B0364400870CFE /* Market.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Market.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3992999B25B0364400870CFE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3992999D25B0364400870CFE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -221,6 +223,7 @@
 				39E119CC2733CB5E006F6479 /* MarketCalendarViewModel.swift */,
 				39E119CE2733E0E6006F6479 /* HistoryViewModel.swift */,
 				39E119D02733F447006F6479 /* ProductViewModel.swift */,
+				39700F932734150C00B9282E /* Observer.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -489,6 +492,7 @@
 				39E119CD2733CB5E006F6479 /* MarketCalendarViewModel.swift in Sources */,
 				3992999E25B0364400870CFE /* SceneDelegate.swift in Sources */,
 				393F0E6C25B060400025BD86 /* JsonFile.swift in Sources */,
+				39700F942734150C00B9282E /* Observer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

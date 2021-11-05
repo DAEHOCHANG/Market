@@ -8,26 +8,21 @@
 import Foundation
 import UIKit
 
-class ProductAppendingViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
+class ProductAppendingViewController: UIViewController {
 
     @IBOutlet weak var number: UITextField!
     @IBOutlet weak var name: UITextField!
     @IBOutlet var addView: UIView!
+    weak var calendarViewModel: MarketCalendarsViewModel?
+    weak var historyViewModel: HistoryViewModel?
+    var appendingDay: Int?
     
-   
     override func viewDidLoad() {
         super.viewDidLoad()
         number.text = "1"
         number.tintColor = .clear
-        setting()
+        //setting()
     }
-    
-    @IBAction func swipeBack(_ sender: UIScreenEdgePanGestureRecognizer) {
-        self.modalTransitionStyle = .crossDissolve
-        self.presentingViewController?.dismiss(animated: true)
-    }
-    
-    
     
     //뒤로가기 버튼
     @IBAction func backButton(_ sender: UIButton) {
@@ -36,32 +31,27 @@ class ProductAppendingViewController: UIViewController, UIPickerViewDelegate, UI
     }
     
     @IBAction func plusButton(_ sender: UIButton) {
-        if name.text == "" {
-            let warning = UIAlertController(title: "에러", message: "품목은 필수로 작성해야 합니다", preferredStyle: .alert)
-            let onAction = UIAlertAction(title: "확인", style: .default, handler: nil)
-            warning.addAction(onAction)
-            present(warning, animated: true, completion: nil)
-            return
-        }
+        defer { self.presentingViewController?.dismiss(animated: true) }
         
-        if marketData[getDate()] == nil {
-            marketData[getDate()] = DataOfDate(date: getDate())
-        }
-        marketData[getDate()]?.append(product: Product(name: name.text!, quantity: UInt(number.text!) ?? 1, isBought: false))
-        historyData.append(newElement: History(productName: name.text!, count: 1))
-        writeMarketData()
-        writeHistoryData()
-        self.presentingViewController?.dismiss(animated: true)
+        guard let day = appendingDay, let viewModel = calendarViewModel else { return }
+        guard let name = name.text, let quantStr = number.text else { return }
+        
+        let quantityS = quantStr.components(separatedBy: CharacterSet.letters).joined().trimmingCharacters(in: .whitespaces)
+        let unit = quantStr.components(separatedBy: CharacterSet.decimalDigits).joined().trimmingCharacters(in: .whitespaces)
+        
+        guard let quantity = Int(quantityS) else { return }
+        
+        let product = MarketProduct(product: tmpProduct(productName: name), productQuantity: quantity,unit: unit)
+        viewModel.appendProduct(when: day, product: product)
+        
     }
     
-    
-    
     //number뷰를 클리갛면 피커뷰 나오게
+    /*
     func setting() {
         let picker = UIPickerView()
         picker.delegate = self
         number.inputView = picker
-        
         
         let exitButton = UIBarButtonItem()
         exitButton.title = "선택"
@@ -69,17 +59,21 @@ class ProductAppendingViewController: UIViewController, UIPickerViewDelegate, UI
         exitButton.action = #selector(pickerExit)
         //exitButton.tintColor = .darkGray
         
-        
         let toolbar = UIToolbar()
         toolbar.tintColor = .systemBlue
-        //UIScreen 은 뭐하는놈이길래,.... 
         toolbar.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 35)
         let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         
         toolbar.setItems([flexSpace,exitButton], animated: false)
         number.inputAccessoryView = toolbar
-    }
+    }*/
     
+    
+}
+
+
+
+extension ProductAppendingViewController: UIPickerViewDelegate, UIPickerViewDataSource  {
     @objc func pickerExit() {
         self.number.text = "\(numbering[selectedRow])"
         selectedRow = 0
@@ -102,7 +96,6 @@ class ProductAppendingViewController: UIViewController, UIPickerViewDelegate, UI
         selectedRow = row
     }
 }
-
 
 extension UITextField {
     open override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {

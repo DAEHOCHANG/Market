@@ -16,6 +16,12 @@ public class MarketCalendarsViewModel {
         calendar = MarketCalendarModel(year: year, month: month)
         calendar = readMarketCalendarModel(calendar: calendar)
     }
+    convenience init() {
+        let component = Calendar.current.dateComponents([.year,.month], from: Date())
+        let yearStr = String(component.year!)
+        let monthStr = String(component.month!)
+        self.init(year: yearStr, month: monthStr)
+    }
     func deleteProduct(when day: Int, product: MarketProduct) {
         calendar.deleteProduct(when: day, product: product)
         writeMarketCalendarModel(calendar: calendar)
