@@ -8,44 +8,57 @@
 import UIKit
 import FSCalendar
 
-class ViewController: UIViewController, UIGestureRecognizerDelegate  {
+class MainViewController: UIViewController, UIGestureRecognizerDelegate  {
     @IBOutlet weak var calendar: FSCalendar!
     @IBOutlet weak var tableView: UITableView!
     
+    let calendarViewModel = MarketCalendarsViewModel()
+    let histroyViewModel = HistoryViewModel()
    
     var copiedData:DataOfDate? = nil
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        //데이터 받기
-        readMarketData()
-        readHistoryData()
-        
-        //날짜 텍스트 설정
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "YYYY-MM-dd"
-        setDate(date: dateFormatter.string(from: calendar.today!))
-        
-        
         //캘린더 설정
         calendar.locale = Locale(identifier: "ko_KR")
         calendar.appearance.headerDateFormat = "YYYY년 M월"
         calendar.delegate = self
         calendar.dataSource = self
+        calendar.appearance.titleTodayColor = .blue
+        calendar.select(Date())
         //테이블 뷰 설정
         tableView.delegate = self
         tableView.dataSource = self
     }
-
+    
+    func selectedDay() -> Int {
+        let component = Calendar.current.dateComponents([.day], from: calendar.selectedDate!)
+        return component.day!
+    }
+    
     //다시 나타날 경우 캘린더, ㅌ테이블 뷰 reload해줘야 할 것
     override func viewWillAppear(_ animated: Bool) {
-        selectedRow = 0
         super.viewWillAppear(animated)
         self.tableView.reloadData()
         self.calendar.reloadData()
         self.navigationController?.navigationBar.isHidden = true
     }
-
+    
+    @IBSegueAction func historySegueAction(_ coder: NSCoder) -> HistoryViewController? {
+        let nvc = HistoryViewController(coder: coder)
+        nvc?.day = selectedDay()
+        nvc?.historyViewModel = self.histroyViewModel
+        nvc?.calendarViewModel = self.calendarViewModel
+        return nvc
+    }
+    
+    @IBSegueAction func addProductSegueAction(_ coder: NSCoder) -> ProductAppendingViewController? {
+        let nvc = ProductAppendingViewController(coder: coder)
+        nvc?.appendingDay = selectedDay()
+        nvc?.calendarViewModel = self.calendarViewModel
+        nvc?.historyViewModel = self.histroyViewModel
+        return nvc
+    }
+    /*
     @IBAction func dateCopy(_ sender: Any) {
         guard let data = marketData[getDate()] else {
             //경고
@@ -83,81 +96,67 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate  {
     @objc func longPress(_ sender: UILongPressGestureRecognizer) {
         print("hi")
     }
-
+*/
 }
 
 //callendar
-extension ViewController: FSCalendarDataSource, FSCalendarDelegate {
+extension MainViewController: FSCalendarDataSource, FSCalendarDelegate {
     //날짜 선택시 메소드
     public func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "YYYY-MM-dd"
-        setDate(date: dateFormatter.string(from: date))
-
         self.tableView.reloadData()
         self.calendar.appearance.todayColor = UIColor.clear
         
         if Calendar.current.isDateInWeekend(Date()) {
             self.calendar.appearance.titleTodayColor = UIColor.red
         } else {
-
             self.calendar.appearance.titleTodayColor = UIColor.black
         }
     }
     
-    // 날짜 선택 해제 시 콜백 메소드
-    public func calendar(_ calendar: FSCalendar, didDeselect date: Date, at monthPosition: FSCalendarMonthPosition) {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "YYYY-MM-dd"
-        setDate(date: "")
-    }
-
     //이벤트 띄우는 메서드
     func calendar(_ calendar: FSCalendar, numberOfEventsFor date: Date) -> Int {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "YYYY-MM-dd"
-        if marketData[dateFormatter.string(from: date)] != nil {
+        let component = Calendar.current.dateComponents([.month,.day], from: date)
+        let currentMonth = Calendar.current.dateComponents([.month], from: calendar.currentPage+100000).month!
+        if currentMonth != component.month || calendarViewModel[component.day!].isEmpty {
+            return 0
+        } else {
             return 1
         }
-        return 0
     }
     
-
-  
-    
-
+    //캘린더 월 변경시
+    func calendarCurrentPageDidChange(_ calendar: FSCalendar) {
+        let date = calendar.currentPage + 100000
+        let compoents = Calendar.current.dateComponents([.year,.month],from: date)
+        self.calendarViewModel.changeCalendar(year: String(compoents.year!), month: String(compoents.month!))
+        self.calendar.reloadData()
+    }
 }
 
 
 //테이블 뷰
-extension ViewController: UITableViewDataSource, UITableViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
+extension MainViewController: UITableViewDataSource, UITableViewDelegate {
     //테이블뷰에 몇개나 올라갈 것인강!
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if let cnt = marketData[getDate()]?.count {
-            return cnt
-        }
-        return 0
+        guard let date = self.calendar.selectedDate else {return 0}
+        let components = Calendar.current.dateComponents([.year,.month,.day],from: date)
+        guard let day = components.day else {return 0}
+        return calendarViewModel[day].count
     }
     
     //각 셀에 무엇이 올라갈 것인가
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "tableview_cell") else {
-            fatalError("error")
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "productTableViewCell") else {
+            return UITableViewCell();
         }
-        guard let list = marketData[getDate()]?.getList() else {
-            return cell
-        }
-        
-      
-        let insertString:String = list[indexPath.row].productToString()
-        cell.textLabel?.text = insertString
+        guard let date = self.calendar.selectedDate else {return cell}
+        let components = Calendar.current.dateComponents([.year,.month,.day],from: date)
+        guard let day = components.day else {return cell}
+        let name = calendarViewModel[day][indexPath.row].product.productName
+        let quant = calendarViewModel[day][indexPath.row].productQuantity
+        let unit = calendarViewModel[day][indexPath.row].product.unit
+        cell.textLabel?.text = "\(name) \(quant)\(unit)"
         cell.textLabel?.textColor = .black
-        if list[indexPath.row].isBought == true {
-            cell.backgroundColor = .darkGray
-        } else {
-            
-            cell.backgroundColor = .clear
-        }
         return cell
     }
     
@@ -167,21 +166,18 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate, UIPickerVi
         
         //삭제, 데이터에서 삭제해 줘야함
         let deleteAction = UIContextualAction(style: .destructive, title:  "삭제", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
-            marketData[getDate()]?.removeProduct(at: indexPath.row)
+            let day = self.selectedDay()
+            let deletProduct = self.calendarViewModel[day][indexPath.row]
+            self.calendarViewModel.deleteProduct(when: day, product: deletProduct)
             tableView.deleteRows(at: [indexPath], with: .fade)
             
-            if marketData[getDate()]?.count == 0 {
-                marketData.removeValue(forKey: getDate())
-            }
-            
-            writeMarketData()
             self.calendar.reloadData()
             success(true)
         })
         
         //수정 버튼
         //=> 구매 완료로 변경
-        
+        /*
         let modifyAction1 = UIContextualAction(style: .normal, title:  "구매완료", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
             var toProduct = marketData[getDate()]?.getList()[indexPath.row]
             toProduct?.isBought = true
@@ -234,9 +230,14 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate, UIPickerVi
             return UISwipeActionsConfiguration(actions:[deleteAction,modifyAction1,changeQuantity])
         } else {
             return UISwipeActionsConfiguration(actions:[deleteAction,modifyAction2,changeQuantity])
-        }
+        }*/
+        return UISwipeActionsConfiguration(actions:[deleteAction])
     }
 
+   
+}
+
+extension MainViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     @objc func pickerExit(sender: UIButton) {
         for tmp in self.view.subviews {
             let s = String(describing: type(of:tmp))
@@ -273,4 +274,3 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate, UIPickerVi
         selectedRow = row
     }
 }
-
