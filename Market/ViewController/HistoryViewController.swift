@@ -84,7 +84,9 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource{
         guard let modelView = self.historyViewModel else {
             return UITableViewCell()
         }
-        cell.textLabel?.text = modelView.histories[indexPath.row].product.productName
+        let name = modelView.histories[indexPath.row].product.productName
+        let unit = modelView.histories[indexPath.row].product.unit
+        cell.textLabel?.text = "\(name) (\(unit))"
         return cell
     }
     
