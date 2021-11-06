@@ -152,7 +152,7 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
         guard let day = components.day else {return cell}
         let name = calendarViewModel[day][indexPath.row].product.productName
         let quant = calendarViewModel[day][indexPath.row].productQuantity
-        let unit = calendarViewModel[day][indexPath.row].unit
+        let unit = calendarViewModel[day][indexPath.row].product.unit
         cell.textLabel?.text = "\(name) \(quant)\(unit)"
         cell.textLabel?.textColor = .black
         return cell

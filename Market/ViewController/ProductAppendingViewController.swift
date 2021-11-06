@@ -41,7 +41,7 @@ class ProductAppendingViewController: UIViewController {
         
         guard let quantity = Int(quantityS) else { return }
         
-        let product = MarketProduct(product: tmpProduct(productName: name), productQuantity: quantity,unit: unit)
+        let product = MarketProduct(product: tmpProduct(productName: name,unit: unit), productQuantity: quantity)
         viewModel.appendProduct(when: day, product: product)
         historyViewModel?.appendProduct(product: product.product)
     }
