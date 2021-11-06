@@ -90,16 +90,18 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource{
     
     
     //드래그해서 삭제하는 경우임
-    /*
+    
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let deleteAction = UIContextualAction(style: .destructive, title:  "삭제", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
-            historyData.remove(at: indexPath.row)
+            guard let viewModel = self.historyViewModel else {return}
+            let product = viewModel.histories[indexPath.row].product
+            
+            viewModel.deleteProduct(product: product)
             tableView.deleteRows(at: [indexPath], with: .fade)
-            writeHistoryData()
             success(true)
         })
         return UISwipeActionsConfiguration(actions:[deleteAction])
-    }*/
+    }
     
     
     
