@@ -46,6 +46,7 @@ class MainViewController: UIViewController, UIGestureRecognizerDelegate  {
     @IBSegueAction func historySegueAction(_ coder: NSCoder) -> HistoryViewController? {
         let nvc = HistoryViewController(coder: coder)
         nvc?.historyViewModel = self.histroyViewModel
+        nvc?.calendarViewModel = self.calendarViewModel
         return nvc
     }
     
