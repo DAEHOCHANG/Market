@@ -41,64 +41,9 @@ class ProductAppendingViewController: UIViewController {
         
         guard let quantity = Int(quantityS) else { return }
         
-        let product = MarketProduct(product: tmpProduct(productName: name), productQuantity: quantity,unit: unit)
+        let product = MarketProduct(product: tmpProduct(productName: name,unit: unit), productQuantity: quantity)
         viewModel.appendProduct(when: day, product: product)
         historyViewModel?.appendProduct(product: product.product)
     }
     
-    //number뷰를 클리갛면 피커뷰 나오게
-    /*
-    func setting() {
-        let picker = UIPickerView()
-        picker.delegate = self
-        number.inputView = picker
-        
-        let exitButton = UIBarButtonItem()
-        exitButton.title = "선택"
-        exitButton.target = self
-        exitButton.action = #selector(pickerExit)
-        //exitButton.tintColor = .darkGray
-        
-        let toolbar = UIToolbar()
-        toolbar.tintColor = .systemBlue
-        toolbar.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 35)
-        let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        
-        toolbar.setItems([flexSpace,exitButton], animated: false)
-        number.inputAccessoryView = toolbar
-    }*/
-    
-    
-}
-
-
-
-extension ProductAppendingViewController: UIPickerViewDelegate, UIPickerViewDataSource  {
-    @objc func pickerExit() {
-        self.number.text = "\(numbering[selectedRow])"
-        selectedRow = 0
-        self.view.endEditing(true)
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return numbering.count
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return String(numbering[row])
-    }
-
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        selectedRow = row
-    }
-}
-
-extension UITextField {
-    open override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
-        return false
-    }
 }

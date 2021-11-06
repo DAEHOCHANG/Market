@@ -12,7 +12,8 @@ import UIKit
 class HistoryViewController: UIViewController, UIGestureRecognizerDelegate {
     @IBOutlet weak var historyList: UITableView!
     weak var historyViewModel:HistoryViewModel?
-    var cellNum = 0
+    weak var calendarViewModel:MarketCalendarsViewModel?
+    var day: Int?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,7 +22,6 @@ class HistoryViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        selectedRow = 0
         self.navigationController?.navigationBar.isHidden = false
         self.navigationController?.interactivePopGestureRecognizer?.delegate = self
         self.historyList.reloadData()
@@ -32,42 +32,6 @@ class HistoryViewController: UIViewController, UIGestureRecognizerDelegate {
     }
 }
 
-extension HistoryViewController: UIPickerViewDelegate, UIPickerViewDataSource {
-    @objc func pickerExit() {
-        if marketData[getDate()] == nil {
-            marketData[getDate()] = DataOfDate(date: getDate())
-        }
-        
-        let product = Product(name: historyData[cellNum].productName, quantity: UInt(numbering[selectedRow]), isBought: false)
-        print(product)
-        historyData[cellNum].count += 1
-        historyData.sort(by: {$0.count > $1.count})
-        
-        marketData[getDate()]?.append(product: product)
-        
-        writeMarketData()
-        writeHistoryData()
-        selectedRow = 0
-        self.view.endEditing(true)
-        self.presentingViewController?.dismiss(animated: true)
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return numbering.count
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return String(numbering[row])
-    }
-
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        selectedRow = row
-    }
-}
 
 extension HistoryViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -84,7 +48,9 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource{
         guard let modelView = self.historyViewModel else {
             return UITableViewCell()
         }
-        cell.textLabel?.text = modelView.histories[indexPath.row].product.productName
+        let name = modelView.histories[indexPath.row].product.productName
+        let unit = modelView.histories[indexPath.row].product.unit
+        cell.textLabel?.text = "\(name) (\(unit))"
         return cell
     }
     
@@ -104,33 +70,31 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource{
     }
     
     
-    
-    
     //history에서 클릭해서 추가할 경우
-    /*
+    //alert로 띄워서 수량을 받은뒤 추가하고 뷰를 종료 할 것임
+    //수량을 받을떄는 숫자만 입력받게 할것
+    //버튼은 추가/취소
+    //제목 : 품목추가
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        cellNum = indexPath.row
-        let picker = UIPickerView()
-        picker.delegate = self
-        picker.frame = CGRect(x: 0, y: self.view.fs_bottom-225, width: UIScreen.main.bounds.width, height: 225)
+        guard let product = historyViewModel?.histories[indexPath.row].product else { return }
         
-        picker.backgroundColor = .systemGray4
+        let appendingAlert = UIAlertController(title: "품목추가", message: "수량을 입력해 주세요", preferredStyle: .alert)
+        let appendAction = UIAlertAction(title: "추가", style: .default, handler:{ _ in
+            guard let textField = appendingAlert.textFields?.first else {return}
+            defer { self.navigationController?.popViewController(animated: true) }
+            guard let str = textField.text else {return}
+            guard let quantity = Int(str) else {return}
+            guard let day = self.day else {return}
+            let marketProduct = MarketProduct(product: product, productQuantity: quantity)
+            self.calendarViewModel?.appendProduct(when: day, product: marketProduct)
+        })
+        let cancelAction = UIAlertAction(title: "취소", style: .destructive, handler: nil)
         
-        let exitButton = UIBarButtonItem()
-        exitButton.title = "선택"
-        exitButton.target = self
-        exitButton.action = #selector(pickerExit)
-        //exitButton.tintColor = .darkGray
+        appendingAlert.addAction(cancelAction)
+        appendingAlert.addAction(appendAction)
+        appendingAlert.addTextField(configurationHandler: nil)
+        appendingAlert.textFields?.first?.keyboardType = .numberPad
         
-        
-        let toolbar = UIToolbar()
-        toolbar.tintColor = .systemBlue
-        toolbar.frame = CGRect(x: 0, y: picker.fs_top-35, width: UIScreen.main.bounds.width, height: 35)
-        let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        toolbar.setItems([flexSpace,exitButton], animated: false)
-        
-        self.view.addSubview(toolbar)
-        self.view.addSubview(picker)
-    }*/
-
+        present(appendingAlert, animated: true, completion: nil)
+    }
 }
