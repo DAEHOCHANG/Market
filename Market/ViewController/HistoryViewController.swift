@@ -13,6 +13,7 @@ class HistoryViewController: UIViewController, UIGestureRecognizerDelegate {
     @IBOutlet weak var historyList: UITableView!
     weak var historyViewModel:HistoryViewModel?
     weak var calendarViewModel:MarketCalendarsViewModel?
+    var day: Int?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -68,9 +69,32 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource{
         return UISwipeActionsConfiguration(actions:[deleteAction])
     }
     
-
+    
     //history에서 클릭해서 추가할 경우
+    //alert로 띄워서 수량을 받은뒤 추가하고 뷰를 종료 할 것임
+    //수량을 받을떄는 숫자만 입력받게 할것
+    //버튼은 추가/취소
+    //제목 : 품목추가
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let product = historyViewModel?.histories[indexPath.row].product else { return }
         
+        let appendingAlert = UIAlertController(title: "품목추가", message: "수량을 입력해 주세요", preferredStyle: .alert)
+        let appendAction = UIAlertAction(title: "추가", style: .default, handler:{ _ in
+            guard let textField = appendingAlert.textFields?.first else {return}
+            defer { self.navigationController?.popViewController(animated: true) }
+            guard let str = textField.text else {return}
+            guard let quantity = Int(str) else {return}
+            guard let day = self.day else {return}
+            let marketProduct = MarketProduct(product: product, productQuantity: quantity)
+            self.calendarViewModel?.appendProduct(when: day, product: marketProduct)
+        })
+        let cancelAction = UIAlertAction(title: "취소", style: .destructive, handler: nil)
+        
+        appendingAlert.addAction(cancelAction)
+        appendingAlert.addAction(appendAction)
+        appendingAlert.addTextField(configurationHandler: nil)
+        appendingAlert.textFields?.first?.keyboardType = .numberPad
+        
+        present(appendingAlert, animated: true, completion: nil)
     }
 }
