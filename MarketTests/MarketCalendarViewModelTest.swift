@@ -70,3 +70,13 @@ class AppendProductTest: XCTestCase {
 class DeleteProductTest: XCTestCase {
     
 }
+
+/**
+ 캘린더 변경 테스트
+ 
+ 마땅히 테스트 해볼 것이 없음
+ 다만 메모리 관련해서 테스트해볼것(이건 어떻게 한담)
+ */
+class ChangeCalendarTest: XCTestCase {
+    
+}
