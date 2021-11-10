@@ -15,7 +15,6 @@ class MainViewController: UIViewController, UIGestureRecognizerDelegate  {
     let calendarViewModel = MarketCalendarsViewModel()
     let histroyViewModel = HistoryViewModel()
    
-    var copiedData:DataOfDate? = nil
     override func viewDidLoad() {
         super.viewDidLoad()
         //캘린더 설정
@@ -235,42 +234,4 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
     }
 
    
-}
-
-extension MainViewController: UIPickerViewDelegate, UIPickerViewDataSource {
-    @objc func pickerExit(sender: UIButton) {
-        for tmp in self.view.subviews {
-            let s = String(describing: type(of:tmp))
-            if s ==  "UIToolbar"  || s ==  "UIPickerView" {
-                tmp.removeFromSuperview()
-            }
-        }
-        self.navigationController?.toolbar.isHidden = false
-        let cellRow = sender.tag
-        guard var unit = marketData[getDate()]?.getList()[cellRow] else {
-            selectedRow = 0
-            return
-        }
-        unit.quantity = UInt(numbering[selectedRow])
-        marketData[getDate()]?.modify(at: cellRow, product: unit)
-        self.tableView.reloadData()
-        writeMarketData()
-        selectedRow = 0
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return numbering.count
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return String(numbering[row])
-    }
-
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        selectedRow = row
-    }
 }
