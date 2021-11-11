@@ -216,7 +216,7 @@
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NHX-lg-zCF">
                                 <rect key="frame" x="100" y="60" width="170" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="수량" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Sf-Vr-SPt">
                                 <rect key="frame" x="10" y="103" width="40" height="28"/>
@@ -233,7 +233,7 @@
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="h9q-Na-fCQ">
                                 <rect key="frame" x="100" y="103" width="170" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3lJ-IU-LGT">
                                 <rect key="frame" x="116.5" y="187" width="87" height="42"/>
@@ -268,7 +268,6 @@
                     </view>
                     <navigationItem key="navigationItem" id="xpW-aC-sUw"/>
                     <connections>
-                        <outlet property="addView" destination="AFO-J2-IKa" id="EXv-GN-BaS"/>
                         <outlet property="name" destination="NHX-lg-zCF" id="HdZ-ww-BGI"/>
                         <outlet property="number" destination="h9q-Na-fCQ" id="whN-ET-mUd"/>
                     </connections>

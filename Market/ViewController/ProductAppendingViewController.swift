@@ -12,7 +12,6 @@ class ProductAppendingViewController: UIViewController {
 
     @IBOutlet weak var number: UITextField!
     @IBOutlet weak var name: UITextField!
-    @IBOutlet var addView: UIView!
     weak var calendarViewModel: MarketCalendarsViewModel?
     weak var historyViewModel: HistoryViewModel?
     var appendingDay: Int?
@@ -20,8 +19,6 @@ class ProductAppendingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         number.text = "1"
-        number.tintColor = .clear
-        //setting()
     }
     
     //뒤로가기 버튼
