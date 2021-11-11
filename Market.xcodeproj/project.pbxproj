@@ -10,7 +10,6 @@
 		393D1CD22732DD0C0063000B /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 393D1CD12732DD0B0063000B /* Product.swift */; };
 		393D1CD42732E1220063000B /* History.swift in Sources */ = {isa = PBXBuildFile; fileRef = 393D1CD32732E1220063000B /* History.swift */; };
 		393D1CD62732E66B0063000B /* MarketCalendarModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 393D1CD52732E66B0063000B /* MarketCalendarModel.swift */; };
-		393F0E6C25B060400025BD86 /* JsonFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 393F0E6B25B060400025BD86 /* JsonFile.swift */; };
 		39700F942734150C00B9282E /* Observer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39700F932734150C00B9282E /* Observer.swift */; };
 		3992999C25B0364400870CFE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3992999B25B0364400870CFE /* AppDelegate.swift */; };
 		3992999E25B0364400870CFE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3992999D25B0364400870CFE /* SceneDelegate.swift */; };
@@ -20,7 +19,6 @@
 		399299A825B0364400870CFE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 399299A625B0364400870CFE /* LaunchScreen.storyboard */; };
 		399299B325B0364400870CFE /* MarketTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 399299B225B0364400870CFE /* MarketTests.swift */; };
 		399299BE25B0364400870CFE /* MarketUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 399299BD25B0364400870CFE /* MarketUITests.swift */; };
-		399E874525B417A200D933FB /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 399E874425B417A200D933FB /* Data.swift */; };
 		39D81C2025B1AE8000066D14 /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39D81C1F25B1AE8000066D14 /* HistoryViewController.swift */; };
 		39D81C2525B1BE5F00066D14 /* ProductAppendingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39D81C2425B1BE5F00066D14 /* ProductAppendingViewController.swift */; };
 		39E119CD2733CB5E006F6479 /* MarketCalendarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39E119CC2733CB5E006F6479 /* MarketCalendarViewModel.swift */; };
@@ -53,7 +51,6 @@
 		393D1CD12732DD0B0063000B /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
 		393D1CD32732E1220063000B /* History.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = History.swift; sourceTree = "<group>"; };
 		393D1CD52732E66B0063000B /* MarketCalendarModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketCalendarModel.swift; sourceTree = "<group>"; };
-		393F0E6B25B060400025BD86 /* JsonFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonFile.swift; sourceTree = "<group>"; };
 		39700F932734150C00B9282E /* Observer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observer.swift; sourceTree = "<group>"; };
 		3992999825B0364400870CFE /* Market.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Market.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3992999B25B0364400870CFE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -69,7 +66,6 @@
 		399299B925B0364400870CFE /* MarketUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MarketUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		399299BD25B0364400870CFE /* MarketUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketUITests.swift; sourceTree = "<group>"; };
 		399299BF25B0364400870CFE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		399E874425B417A200D933FB /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		39D81C1F25B1AE8000066D14 /* HistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
 		39D81C2425B1BE5F00066D14 /* ProductAppendingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductAppendingViewController.swift; sourceTree = "<group>"; };
 		39E119CC2733CB5E006F6479 /* MarketCalendarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketCalendarViewModel.swift; sourceTree = "<group>"; };
@@ -123,14 +119,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		393D1CD02732D5E20063000B /* Features */ = {
-			isa = PBXGroup;
-			children = (
-				393F0E6B25B060400025BD86 /* JsonFile.swift */,
-			);
-			path = Features;
-			sourceTree = "<group>";
-		};
 		3992998F25B0364400870CFE = {
 			isa = PBXGroup;
 			children = (
@@ -157,7 +145,6 @@
 			isa = PBXGroup;
 			children = (
 				39E119CB2733C447006F6479 /* ViewModel */,
-				393D1CD02732D5E20063000B /* Features */,
 				399E873D25B416A400D933FB /* ViewController */,
 				399E873C25B416A000D933FB /* StoryBoards */,
 				399E873B25B4169700D933FB /* Model */,
@@ -190,7 +177,6 @@
 		399E873B25B4169700D933FB /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				399E874425B417A200D933FB /* Data.swift */,
 				393D1CD12732DD0B0063000B /* Product.swift */,
 				393D1CD32732E1220063000B /* History.swift */,
 				393D1CD52732E66B0063000B /* MarketCalendarModel.swift */,
@@ -483,7 +469,6 @@
 				39D81C2025B1AE8000066D14 /* HistoryViewController.swift in Sources */,
 				393D1CD22732DD0C0063000B /* Product.swift in Sources */,
 				399299A025B0364400870CFE /* MainViewController.swift in Sources */,
-				399E874525B417A200D933FB /* Data.swift in Sources */,
 				39E119D12733F447006F6479 /* ProductViewModel.swift in Sources */,
 				3992999C25B0364400870CFE /* AppDelegate.swift in Sources */,
 				39D81C2525B1BE5F00066D14 /* ProductAppendingViewController.swift in Sources */,
@@ -491,7 +476,6 @@
 				393D1CD62732E66B0063000B /* MarketCalendarModel.swift in Sources */,
 				39E119CD2733CB5E006F6479 /* MarketCalendarViewModel.swift in Sources */,
 				3992999E25B0364400870CFE /* SceneDelegate.swift in Sources */,
-				393F0E6C25B060400025BD86 /* JsonFile.swift in Sources */,
 				39700F942734150C00B9282E /* Observer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -51,6 +51,8 @@ struct YearMonth: Hashable, Codable {
     var month: String
 }
 
+
+
 public func readMarketCalendarModel(calendar data: MarketCalendarModel) -> MarketCalendarModel {
     let year = data.year
     let month = data.month
@@ -69,20 +71,25 @@ public func readMarketCalendarModel(calendar data: MarketCalendarModel) -> Marke
 }
 
 public func writeMarketCalendarModel(calendar data: MarketCalendarModel) {
-    let year = data.year
-    let month = data.month
-    do {
-        let fileManager = FileManager.default
-        let baseURL = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first!
-        let dirURL = baseURL.appendingPathComponent("MarketCalendar")
-        if fileManager.fileExists(atPath: dirURL.path) == false {
-            try fileManager.createDirectory(at: dirURL, withIntermediateDirectories: false, attributes: nil)
+    let closure = {
+        let year = data.year
+        let month = data.month
+        do {
+            let fileManager = FileManager.default
+            let baseURL = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first!
+            let dirURL = baseURL.appendingPathComponent("MarketCalendar")
+            if fileManager.fileExists(atPath: dirURL.path) == false {
+                try fileManager.createDirectory(at: dirURL, withIntermediateDirectories: false, attributes: nil)
+            }
+            let fileURL = dirURL.appendingPathComponent("\(year)&\(month)",isDirectory: false)
+            let tmpData = try JSONEncoder().encode(data)
+            let str = String(data: tmpData, encoding: .utf8)!
+            try str.write(to: fileURL, atomically: true, encoding: .utf8)
+        } catch {
+            print("write Market Error \(error)")
         }
-        let fileURL = dirURL.appendingPathComponent("\(year)&\(month)",isDirectory: false)
-        let tmpData = try JSONEncoder().encode(data)
-        let str = String(data: tmpData, encoding: .utf8)!
-        try str.write(to: fileURL, atomically: true, encoding: .utf8)
-    } catch {
-        print("write Market Error \(error)")
+    }
+    DispatchQueue.global().async {
+        closure()
     }
 }
