@@ -10,7 +10,6 @@
 		393D1CD22732DD0C0063000B /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 393D1CD12732DD0B0063000B /* Product.swift */; };
 		393D1CD42732E1220063000B /* History.swift in Sources */ = {isa = PBXBuildFile; fileRef = 393D1CD32732E1220063000B /* History.swift */; };
 		393D1CD62732E66B0063000B /* MarketCalendarModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 393D1CD52732E66B0063000B /* MarketCalendarModel.swift */; };
-		393F0E6C25B060400025BD86 /* JsonFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 393F0E6B25B060400025BD86 /* JsonFile.swift */; };
 		39700F942734150C00B9282E /* Observer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39700F932734150C00B9282E /* Observer.swift */; };
 		3992999C25B0364400870CFE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3992999B25B0364400870CFE /* AppDelegate.swift */; };
 		3992999E25B0364400870CFE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3992999D25B0364400870CFE /* SceneDelegate.swift */; };
@@ -20,7 +19,6 @@
 		399299A825B0364400870CFE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 399299A625B0364400870CFE /* LaunchScreen.storyboard */; };
 		399299B325B0364400870CFE /* MarketTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 399299B225B0364400870CFE /* MarketTests.swift */; };
 		399299BE25B0364400870CFE /* MarketUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 399299BD25B0364400870CFE /* MarketUITests.swift */; };
-		399E874525B417A200D933FB /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 399E874425B417A200D933FB /* Data.swift */; };
 		399E92A6273BEDD400967408 /* MarketCalendarViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 399E92A5273BEDD400967408 /* MarketCalendarViewModelTest.swift */; };
 		39D81C2025B1AE8000066D14 /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39D81C1F25B1AE8000066D14 /* HistoryViewController.swift */; };
 		39D81C2525B1BE5F00066D14 /* ProductAppendingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39D81C2425B1BE5F00066D14 /* ProductAppendingViewController.swift */; };
@@ -69,7 +67,6 @@
 		399299B925B0364400870CFE /* MarketUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MarketUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		399299BD25B0364400870CFE /* MarketUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketUITests.swift; sourceTree = "<group>"; };
 		399299BF25B0364400870CFE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		399E874425B417A200D933FB /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		399E92A5273BEDD400967408 /* MarketCalendarViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketCalendarViewModelTest.swift; sourceTree = "<group>"; };
 		39D81C1F25B1AE8000066D14 /* HistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
 		39D81C2425B1BE5F00066D14 /* ProductAppendingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductAppendingViewController.swift; sourceTree = "<group>"; };
@@ -668,6 +665,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.daeho;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -689,6 +687,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.daeho;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
