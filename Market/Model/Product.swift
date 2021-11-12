@@ -8,9 +8,8 @@
 import Foundation
 
 struct MarketProduct: Codable {
-    var product: tmpProduct
+    var product: Product
     var productQuantity: Int
-    
 }
 extension MarketProduct: Equatable {
     static func == (lhs: MarketProduct, rhs: MarketProduct) -> Bool {
@@ -18,15 +17,15 @@ extension MarketProduct: Equatable {
     }
 }
 
-struct tmpProduct: Codable{
+struct Product: Codable {
     var productName: String
     var unit: String = ""
 }
 
-extension tmpProduct: Hashable {}
+extension Product: Hashable {}
 
-extension tmpProduct: Equatable {
-    static func == (lhs: tmpProduct, rhs: tmpProduct) -> Bool {
+extension Product: Equatable {
+    static func == (lhs: Product, rhs: Product) -> Bool {
         return lhs.productName == rhs.productName && lhs.unit == rhs.unit
     }
 }
