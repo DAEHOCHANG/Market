@@ -18,6 +18,8 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Build
-      run: xcodebuild test -project Market.xcodeproj -scheme Market -destination 'platform=iOS Simulator,name=iPhone 11 Pro,OS=14.4'
+      run: |
+        pod install --repo-update --clean-install --project-directory=Market
+        xcodebuild test -project Market.xcodeproj -scheme Market -destination 'platform=iOS Simulator,name=iPhone 11 Pro,OS=14.4'
     - name: Run tests
       run: swift test -v
