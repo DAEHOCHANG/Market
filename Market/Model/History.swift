@@ -7,21 +7,20 @@
 
 import Foundation
 
-
-struct tmpHistory: Hashable, Codable {
-    var product: tmpProduct
+struct History: Hashable, Codable {
+    var product: Product
     var count: Int
     var star: Bool
 }
 
 public struct MarketHistory: Codable {
-    var histories: [tmpProduct:tmpHistory] = [:]
-    mutating func deleteProduct(product: tmpProduct) {
+    var histories: [Product: History] = [:]
+    mutating func deleteProduct(product: Product) {
         self.histories.removeValue(forKey: product)
     }
-    mutating func appendProduct(product: tmpProduct) {
+    mutating func appendProduct(product: Product) {
         if histories[product] == nil {
-            let history = tmpHistory(product: product, count: 1, star: false)
+            let history = History(product: product, count: 1, star: false)
             histories[product] = history
         } else {
             histories[product]?.count += 1

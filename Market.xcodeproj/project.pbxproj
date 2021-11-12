@@ -11,6 +11,7 @@
 		393D1CD42732E1220063000B /* History.swift in Sources */ = {isa = PBXBuildFile; fileRef = 393D1CD32732E1220063000B /* History.swift */; };
 		393D1CD62732E66B0063000B /* MarketCalendarModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 393D1CD52732E66B0063000B /* MarketCalendarModel.swift */; };
 		39700F942734150C00B9282E /* Observer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39700F932734150C00B9282E /* Observer.swift */; };
+		398826ED273E5CA6004DCD8D /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 398826EC273E5CA6004DCD8D /* .swiftlint.yml */; };
 		3992999C25B0364400870CFE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3992999B25B0364400870CFE /* AppDelegate.swift */; };
 		3992999E25B0364400870CFE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3992999D25B0364400870CFE /* SceneDelegate.swift */; };
 		399299A025B0364400870CFE /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3992999F25B0364400870CFE /* MainViewController.swift */; };
@@ -53,6 +54,7 @@
 		393D1CD32732E1220063000B /* History.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = History.swift; sourceTree = "<group>"; };
 		393D1CD52732E66B0063000B /* MarketCalendarModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketCalendarModel.swift; sourceTree = "<group>"; };
 		39700F932734150C00B9282E /* Observer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observer.swift; sourceTree = "<group>"; };
+		398826EC273E5CA6004DCD8D /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		3992999825B0364400870CFE /* Market.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Market.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3992999B25B0364400870CFE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3992999D25B0364400870CFE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -124,6 +126,7 @@
 		3992998F25B0364400870CFE = {
 			isa = PBXGroup;
 			children = (
+				398826EC273E5CA6004DCD8D /* .swiftlint.yml */,
 				3992999A25B0364400870CFE /* Market */,
 				399299B125B0364400870CFE /* MarketTests */,
 				399299BC25B0364400870CFE /* MarketUITests */,
@@ -242,6 +245,7 @@
 				3992999525B0364400870CFE /* Frameworks */,
 				3992999625B0364400870CFE /* Resources */,
 				8D8E0E27E54F93EE76EE6D5C /* [CP] Embed Pods Frameworks */,
+				395F32AC273E3DC200BB44D7 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -338,6 +342,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				398826ED273E5CA6004DCD8D /* .swiftlint.yml in Resources */,
 				399299A825B0364400870CFE /* LaunchScreen.storyboard in Resources */,
 				399299A525B0364400870CFE /* Assets.xcassets in Resources */,
 				399299A325B0364400870CFE /* Main.storyboard in Resources */,
@@ -361,6 +366,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		395F32AC273E3DC200BB44D7 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n${PODS_ROOT}/SwiftLint/swiftlint\n";
+		};
 		5FB28D7AE0F5B4BA970CF246 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
