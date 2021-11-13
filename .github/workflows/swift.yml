@@ -20,6 +20,7 @@ jobs:
     - name: Build
       run: |
         pod install --repo-update --clean-install
-        xcodebuild clean test -workspace Market.xcworkspace -scheme Market -destination 'platform=iOS Simulator,name=iPhone 11 Pro,OS=latest'
+        xcodebuild clean build -workspace Market.xcworkspace -scheme Market -destination 'platform=iOS Simulator,name=iPhone 11 Pro,OS=latest'
     - name: Run tests
-      run: swift test -v
+      run: |
+        xcodebuild clean test -workspace Market.xcworkspace -scheme Market -destination 'platform=iOS Simulator,name=iPhone 11 Pro,OS=latest'
