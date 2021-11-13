@@ -58,10 +58,12 @@ class AppendProductTest: XCTestCase {
     
     func testManyProdcut() {
         let max = 100
+        
         for productName in 1...max {
             let product = MarketProduct(product: Product(productName: String(productName), unit: "g"), productQuantity: 10)
             calendar.appendProduct(when: day, product: product)
         }
+        sleep(3)
         let newCalendar = MarketCalendarsViewModel()
         let day1 = calendar[day].count
         let day2 = newCalendar[day].count
