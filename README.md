@@ -1,4 +1,4 @@
-# Market
+# Market (어플 이름: 장보기 리스트)
 ![256](https://user-images.githubusercontent.com/59390495/141672197-e8a2e8d1-83dd-4339-af48-9178124f4d08.png)
 
 
