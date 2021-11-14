@@ -2,10 +2,10 @@ name: Market
 
 on:
   push:
-    branches: |
+    branches:
       - features/*
   pull_request:
-    branches: |
+    branches:
       - main
       - release
       - develop
