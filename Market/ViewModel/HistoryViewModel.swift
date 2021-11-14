@@ -9,20 +9,17 @@ import Foundation
 
 public class HistoryViewModel {
     private var history: MarketHistory
-    
-    var histories: [History] {
-        return [History](history.histories.values)
+    var histories: [tmpHistory] {
+        return Array<tmpHistory>(history.histories.values)
     }
-    
     init() {
         self.history = readMarketHistory()
     }
-    
-    func deleteProduct(product: Product) {
+    func deleteProduct(product: tmpProduct) {
         history.deleteProduct(product: product)
         writeMarketHistory(history: history)
     }
-    func appendProduct(product: Product) {
+    func appendProduct(product: tmpProduct) {
         history.appendProduct(product: product)
         writeMarketHistory(history: history)
     }

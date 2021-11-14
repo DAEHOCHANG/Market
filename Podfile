@@ -5,7 +5,6 @@ target 'Market' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
   pod 'FSCalendar'
-  pod 'SwiftLint'
   # Pods for Market
 
   target 'MarketTests' do
@@ -20,14 +19,8 @@ target 'Market' do
 end
 
 post_install do |installer|
-  installer.pods_project.build_configurations.each do |config|
-    config.build_settings.delete('CODE_SIGNING_ALLOWED')
-    config.build_settings.delete('CODE_SIGNING_REQUIRED')
-    config.build_settings['EXCLUDED_ARCHS[sdk=iphonesimulator*]'] = 'arm64'
-  end
-  installer.pods_project.targets.each do |target|
-    target.build_configurations.each do |config|
-      config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '12.0'
+    installer.pods_project.build_configurations.each do |config|
+        config.build_settings.delete('CODE_SIGNING_ALLOWED')
+        config.build_settings.delete('CODE_SIGNING_REQUIRED')
     end
-  end
 end

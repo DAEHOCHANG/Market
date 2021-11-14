@@ -7,10 +7,10 @@
 
 import Foundation
 
-public struct MarketCalendarModel: Codable {
-    // [date:[Product]] 같은 구조
+public struct MarketCalendarModel: Codable{
+    //[date:[Product]] 같은 구조
     var yearMonth: YearMonth
-    var productsOfDates: [Int: [MarketProduct]] = [:]
+    var productsOfDates: [Int:[MarketProduct]] = [:]
     init(year: String, month: String) {
         self.yearMonth = YearMonth(year: year, month: month)
     }
@@ -23,12 +23,9 @@ extension MarketCalendarModel {
     var month: String {
         return yearMonth.month
     }
-    subscript(day hash: Int) -> [MarketProduct] {
-        if productsOfDates[hash] == nil {
-            return []
-        } else {
-            return productsOfDates[hash]!
-        }
+    subscript(day hash:Int) -> [MarketProduct] {
+        if productsOfDates[hash] == nil { return [] }
+        else { return productsOfDates[hash]! }
     }
     mutating func deleteProduct(when day: Int, product: MarketProduct) {
         if productsOfDates[day] == nil { return }
@@ -38,9 +35,12 @@ extension MarketCalendarModel {
         if productsOfDates[day] == nil {
             productsOfDates[day] = []
         }
-        for (idx, productVal) in productsOfDates[day]!.enumerated() where productVal == product {
-            productsOfDates[day]![idx].productQuantity += product.productQuantity
-            return
+        
+        for (idx,productVal) in productsOfDates[day]!.enumerated() {
+            if productVal == product {
+                productsOfDates[day]![idx].productQuantity += product.productQuantity
+                return
+            }
         }
         productsOfDates[day]!.append(product)
     }
@@ -50,6 +50,8 @@ struct YearMonth: Hashable, Codable {
     var year: String
     var month: String
 }
+
+
 
 public func readMarketCalendarModel(calendar data: MarketCalendarModel) -> MarketCalendarModel {
     let year = data.year
@@ -79,7 +81,7 @@ public func writeMarketCalendarModel(calendar data: MarketCalendarModel) {
             if fileManager.fileExists(atPath: dirURL.path) == false {
                 try fileManager.createDirectory(at: dirURL, withIntermediateDirectories: false, attributes: nil)
             }
-            let fileURL = dirURL.appendingPathComponent("\(year)&\(month)", isDirectory: false)
+            let fileURL = dirURL.appendingPathComponent("\(year)&\(month)",isDirectory: false)
             let tmpData = try JSONEncoder().encode(data)
             let str = String(data: tmpData, encoding: .utf8)!
             try str.write(to: fileURL, atomically: true, encoding: .utf8)
