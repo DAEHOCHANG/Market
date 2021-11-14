@@ -48,6 +48,8 @@ class AppendProductTest: XCTestCase {
         XCTAssertEqual(quan1, 10, "애매한 경우 테스트 에러")
         XCTAssertEqual(quan2, 20, "애매한 경우 테스트 에러")
     }
+    /*
+     테스트 주석
     func testManyProdcut() {
         let max = 100
         for productName in 1...max {
@@ -59,7 +61,7 @@ class AppendProductTest: XCTestCase {
         let d2 = newCalendar[day].count
         XCTAssertEqual(d1, max, "많이 넣는경우 테스트 에러")
         XCTAssertEqual(d1, d2, "많이 넣는경우 테스트 에러")
-    }
+    }*/
 }
 
 /**

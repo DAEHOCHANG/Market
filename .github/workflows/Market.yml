@@ -1,0 +1,25 @@
+name: Market
+
+on:
+  push:
+    branches:
+      - features/*
+  pull_request:
+    branches:
+      - main
+      - release
+      - develop
+
+jobs:
+  build:
+
+    runs-on: macos-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build
+      run: |
+        xcodebuild build -workspace Market.xcworkspace -scheme Market -destination 'platform=iOS Simulator,name=iPhone 11 Pro,OS=latest'
+    - name: Run tests
+      run: |
+        xcodebuild test -workspace Market.xcworkspace -scheme Market -destination 'platform=iOS Simulator,name=iPhone 11 Pro,OS=latest'
