@@ -3,12 +3,12 @@ name: Market
 on:
   push:
     branches: |
-      features/*
+      - features/*
   pull_request:
     branches: |
-      main
-      release
-      develop
+      - main
+      - release
+      - develop
 
 jobs:
   build:
