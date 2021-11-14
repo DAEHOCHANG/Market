@@ -12,3 +12,5 @@
 
 [SwiftLint(예정)](https://github.com/realm/SwiftLint)
 
+## 브랜치별 설명
+[여기서 확인!](https://github.com/DAEHOCHANG/Market/blob/main/Branches.md)
