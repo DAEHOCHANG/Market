@@ -14,3 +14,6 @@
 
 ## 브랜치별 설명
 [여기서 확인!](https://github.com/DAEHOCHANG/Market/blob/main/Branches.md)
+
+## 커밋 설명
+[여기서 확인!](https://github.com/DAEHOCHANG/Market/blob/main/commits.md)
