@@ -14,7 +14,7 @@ class MainViewController: UIViewController, UIGestureRecognizerDelegate  {
     
     let calendarViewModel = MarketCalendarsViewModel()
     let histroyViewModel = HistoryViewModel()
-   
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         //캘린더 설정
@@ -27,6 +27,10 @@ class MainViewController: UIViewController, UIGestureRecognizerDelegate  {
         //테이블 뷰 설정
         tableView.delegate = self
         tableView.dataSource = self
+        calendarViewModel.dataDidChanged = {
+            self.tableView.reloadData()
+            self.calendar.reloadData()
+        }
     }
     
     func selectedDay() -> Int {
@@ -37,8 +41,6 @@ class MainViewController: UIViewController, UIGestureRecognizerDelegate  {
     //다시 나타날 경우 캘린더, ㅌ테이블 뷰 reload해줘야 할 것
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.tableView.reloadData()
-        self.calendar.reloadData()
         self.navigationController?.navigationBar.isHidden = true
     }
     
@@ -128,7 +130,6 @@ extension MainViewController: FSCalendarDataSource, FSCalendarDelegate {
         let date = calendar.currentPage + 100000
         let compoents = Calendar.current.dateComponents([.year,.month],from: date)
         self.calendarViewModel.changeCalendar(year: String(compoents.year!), month: String(compoents.month!))
-        self.calendar.reloadData()
     }
 }
 
@@ -168,9 +169,8 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
             let day = self.selectedDay()
             let deletProduct = self.calendarViewModel[day][indexPath.row]
             self.calendarViewModel.deleteProduct(when: day, product: deletProduct)
-            tableView.deleteRows(at: [indexPath], with: .fade)
+            //tableView.deleteRows(at: [indexPath], with: .fade)
             
-            self.calendar.reloadData()
             success(true)
         })
         
